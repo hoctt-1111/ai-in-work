@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo File Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { margin: 0; background: var(--bg-primary); }
+        .viewer-header {
+            position: sticky; top: 0; z-index: 10;
+            background: var(--bg-sidebar); color: #fff;
+            padding: 12px 24px; display: flex; align-items: center; gap: 16px;
+        }
+        .viewer-header a { color: var(--color-primary-light); text-decoration: none; font-size: 14px; }
+        .viewer-header a:hover { text-decoration: underline; }
+        .viewer-filename { font-weight: 600; font-size: 14px; opacity: 0.9; flex: 1; }
+        .viewer-copy-btn {
+            background: rgba(255,255,255,0.12); border: none; color: #fff;
+            padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;
+            font-family: var(--font-sans); transition: background 0.2s;
+        }
+        .viewer-copy-btn:hover { background: rgba(255,255,255,0.22); }
+        .viewer-copy-btn.copied { background: var(--color-success); }
+        .viewer-body {
+            max-width: 860px; margin: 0 auto; padding: 40px 40px 80px;
+        }
+        .viewer-body h1:first-child { margin-top: 0; }
+        @media (max-width: 640px) { .viewer-body { padding: 24px 16px 60px; } }
+    </style>
+</head>
+<body>
+    <div class="viewer-header">
+        <a href="javascript:history.back()">← Quay lại</a>
+        <span class="viewer-filename" id="filename"></span>
+        <button class="viewer-copy-btn" id="copy-all">📋 Copy nội dung</button>
+    </div>
+    <div class="viewer-body section-content" id="content">Loading...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        var params = new URLSearchParams(window.location.search);
+        var file = params.get('file');
+        var rawText = '';
+
+        if (file) {
+            document.getElementById('filename').textContent = file;
+            document.title = file.split('/').pop() + ' — Demo Viewer';
+
+            fetch(file)
+                .then(function(r) { return r.text(); })
+                .then(function(text) {
+                    rawText = text;
+                    marked.setOptions({ breaks: true, gfm: true });
+                    document.getElementById('content').innerHTML = marked.parse(text);
+
+                    // Add copy buttons to code blocks
+                    document.querySelectorAll('pre code').forEach(function(codeEl) {
+                        var pre = codeEl.parentElement;
+                        pre.style.position = 'relative';
+                        var btn = document.createElement('button');
+                        btn.className = 'code-copy-btn';
+                        btn.style.opacity = '1';
+                        btn.textContent = 'Copy';
+                        btn.addEventListener('click', function() {
+                            navigator.clipboard.writeText(codeEl.textContent).then(function() {
+                                btn.textContent = 'Copied!';
+                                btn.classList.add('copied');
+                                setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+                            });
+                        });
+                        pre.appendChild(btn);
+                    });
+                })
+                .catch(function() {
+                    document.getElementById('content').textContent = 'File not found: ' + file;
+                });
+        }
+
+        document.getElementById('copy-all').addEventListener('click', function() {
+            var btn = this;
+            navigator.clipboard.writeText(rawText).then(function() {
+                btn.textContent = '✅ Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() { btn.textContent = '📋 Copy nội dung'; btn.classList.remove('copied'); }, 1500);
+            });
+        });
+
+        // Inherit theme
+        var saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+    </script>
+</body>
+</html>

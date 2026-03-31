@@ -221,10 +221,16 @@ Người phụ trách: 部長 level phía khách hàng
 
 ---
 
-## Case Study A: Email thông báo delay — Soạn & kiểm tra Keigo
+## Case Study A: Soạn & kiểm tra Keigo
 
-### Tình huống
+> 📂 **Demo files:** [Brief tiếng Việt](demo-data/case-a-keigo-email/01_brief_tieng_viet.md) · [Prompt kém ❌](demo-data/case-a-keigo-email/02_prompt_kem.md) · [Prompt CRAFT ✅](demo-data/case-a-keigo-email/03_prompt_craft.md) · [Follow-up giải thích keigo](demo-data/case-a-keigo-email/04_followup_giai_thich.md)
+
+### 📌 Tình huống
 Sprint delay 3 ngày do requirement thay đổi giữa chừng. Cần gửi email xin lỗi + giải thích + đề xuất plan mới cho 部長 (buchō) phía khách.
+
+### 🛠️ Tools sử dụng
+- **ChatGPT / Claude** — Soạn email tiếng Nhật từ brief tiếng Việt
+- **Gợi ý thêm:** Dùng ChatGPT tạo nhiều version → so sánh tone
 
 ### ❌ Cách dùng kém
 Paste tiếng Việt → "Dịch sang tiếng Nhật" → Gửi luôn
@@ -245,46 +251,200 @@ Relationship: [MÔ TẢ].
 [TONE] ビジネス敬語, mức lịch sự phù hợp với [CHỨC DANH].
 \`\`\`
 
+### 💡 Điểm hay
+- AI hiểu **level keigo** theo chức danh (部長 vs 課長 vs 担当者)
+- Có thể yêu cầu AI **giải thích từng pattern keigo** đã dùng → BrSE học thêm
+- Tạo nhiều version (formal / semi-formal) để chọn phù hợp tình huống
+
 ---
 
-## Case Study B: Dịch thuật Việt ↔ Nhật có ngữ cảnh
+## Case Study B: Dịch tài liệu có thuật ngữ chuyên ngành
 
-### Tình huống
-Dịch mô tả chức năng có thuật ngữ domain-specific (e.g. nông nghiệp: 圃場管理, 出荷予定)
+> 📂 **Demo files:** [Spec gốc JP](demo-data/case-b-glossary-translation/01_sample_spec_jp.md) · [Prompt rút glossary](demo-data/case-b-glossary-translation/02_prompt_rut_glossary.md) · [Glossary mẫu](demo-data/case-b-glossary-translation/03_glossary_output_mau.md) · [Prompt dịch spec](demo-data/case-b-glossary-translation/04_prompt_dich_spec.md) · [Input glossary ChatGPT](demo-data/case-b-glossary-translation/05_input_glossary_chatgpt.md)
+
+### 📌 Tình huống
+Nhận spec hệ thống nông nghiệp từ khách chứa nhiều thuật ngữ domain-specific (圃場管理, 防除暦, 出荷予定). Cần dịch chính xác sang tiếng Việt cho team dev hiểu, và ngược lại dịch Q&A sang tiếng Nhật cho khách.
+
+### 🛠️ Tools sử dụng
+- **NotebookLM** — Rút glossary + dịch spec có context
+- **ChatGPT / Claude** — Dịch với glossary được input sẵn
+
+---
+
+### Bước 1: Dùng NotebookLM rút Glossary từ spec cũ
+
+Upload tất cả spec/tài liệu cũ của dự án vào NotebookLM làm source, sau đó hỏi:
+
+\`\`\`
+Liệt kê tất cả thuật ngữ chuyên ngành (tiếng Nhật) xuất hiện trong các tài liệu.
+Format dạng bảng: 日本語 / Tiếng Việt / English / Giải thích ngắn
+\`\`\`
+
+**Output mẫu:**
+
+| 日本語 | Tiếng Việt | English | Giải thích |
+| --- | --- | --- | --- |
+| 圃場管理 | Quản lý thửa ruộng | Farm plot management | Quản lý thông tin từng thửa ruộng: diện tích, loại cây, lịch sử canh tác |
+| 防除暦 | Lịch phòng trừ dịch hại | Pest control calendar | Lịch phun thuốc / xử lý sâu bệnh theo mùa vụ |
+| 出荷予定 | Kế hoạch xuất hàng | Shipment schedule | Kế hoạch thu hoạch + đóng gói + giao hàng |
+
+> **Tip:** NotebookLM giữ context toàn bộ tài liệu → rút glossary **chính xác hơn** so với hỏi GenAI không có tài liệu gốc.
+
+---
+
+### Bước 2: Input glossary vào NotebookLM để dịch spec
+
+Sau khi có glossary, **giữ nguyên trong cùng notebook** (hoặc thêm glossary như 1 source), rồi paste spec cần dịch:
+
+\`\`\`
+Dựa trên bảng thuật ngữ đã tạo ở trên, dịch nội dung spec sau sang tiếng Việt.
+Yêu cầu:
+- Thuật ngữ chuyên ngành phải dùng ĐÚNG bản dịch trong glossary
+- Giữ nguyên cấu trúc heading
+- Đối tượng đọc: Developer Việt Nam
+---
+[PASTE SPEC CẦN DỊCH - đã anonymize]
+\`\`\`
+
+**Ưu điểm:** NotebookLM đã có toàn bộ spec cũ làm context → hiểu đúng nghĩa thuật ngữ trong ngữ cảnh dự án, không cần giải thích lại.
+
+---
+
+### Bước 3: Input glossary vào ChatGPT
+
+Với ChatGPT, có **3 cách** input glossary:
+
+**Cách 1: Custom Instructions (推奨)**
+Vào Settings → Custom Instructions → thêm glossary vào phần "What would you like ChatGPT to know about you?"
+\`\`\`
+Tôi là BrSE làm dự án hệ thống nông nghiệp JP.
+Khi dịch tài liệu, dùng bảng thuật ngữ sau:
+- 圃場管理 = Quản lý thửa ruộng
+- 防除暦 = Lịch phòng trừ dịch hại
+- 出荷予定 = Kế hoạch xuất hàng
+- ...
+\`\`\`
+→ **Áp dụng cho MỌI cuộc chat** mà không cần paste lại.
+
+**Cách 2: Project / GPTs (cho team)**
+Tạo Custom GPT hoặc ChatGPT Project với glossary + instruction sẵn → share cho cả team BrSE/Comtor cùng dùng.
+
+**Cách 3: Đầu mỗi cuộc chat**
+\`\`\`
+Trước khi dịch, hãy tuân thủ bảng thuật ngữ sau.
+Bất kỳ thuật ngữ nào có trong bảng → dùng bản dịch chỉ định.
+Thuật ngữ không có trong bảng → dịch tự nhiên + đánh dấu [?] để tôi review.
+
+[PASTE BẢNG GLOSSARY]
+\`\`\`
+→ Phù hợp khi cần **linh hoạt** thay đổi glossary theo dự án.
+
+---
 
 ### So sánh kết quả
 
-| Thuật ngữ | Google Translate | AI có context |
-| --- | --- | --- |
-| 圃場管理 | Quản lý cánh đồng (?) | Quản lý thửa ruộng (farm plot management) |
-| 防除暦 | Lịch phòng trừ (?) | Lịch phun thuốc / phòng trừ dịch hại |
+| Thuật ngữ | Google Translate | GenAI không glossary | NotebookLM / GenAI có glossary |
+| --- | --- | --- | --- |
+| 圃場管理 | Quản lý cánh đồng (?) | Field management | Quản lý thửa ruộng ✅ |
+| 防除暦 | Lịch phòng trừ (?) | Pest control calendar | Lịch phòng trừ dịch hại ✅ |
+| 出荷予定 | Dự định xuất hàng (?) | Shipping schedule | Kế hoạch xuất hàng ✅ |
 
-### Tips quan trọng
-- Cung cấp **glossary / bảng thuật ngữ dự án** cho AI mỗi lần dịch
-- Chỉ định **đối tượng đọc** (KH? Dev? PM?)
-- Chỉ định **loại tài liệu** (email? spec? report?)
+### 💡 Điểm hay
+- NotebookLM: **rút glossary + dịch trong cùng 1 tool** — context liên tục, không mất thông tin
+- ChatGPT Custom Instructions: **setup 1 lần, apply mọi chat** — tiết kiệm thời gian
+- Custom GPT: **share cho cả team** — đảm bảo consistency thuật ngữ giữa các member
+- Đánh dấu **[?]** cho thuật ngữ mới → BrSE chỉ cần review điểm chưa chắc
 
 ---
 
-## Case Study C: Meeting transcript → Biên bản chuẩn JP
+## Case Study C: Meeting translate & Meeting recording
 
-### Tình huống
-Cuộc họp 1 tiếng với khách, phải viết 議事録 (gijiroku) trong 30 phút.
+> 📂 **Demo files:** [Transcript cuộc họp](demo-data/case-c-meeting/01_meeting_transcript.md) · [Prompt tạo 議事録](demo-data/case-c-meeting/02_prompt_gijiroku.md) · [Prompt tóm tắt cho dev](demo-data/case-c-meeting/03_prompt_summary_cho_dev.md)
 
-### Prompt template
+### 📌 Tình huống
+Cuộc họp 1 tiếng với khách JP — BrSE cần vừa nghe, vừa ghi chú, vừa translate cho dev team. Sau meeting phải viết 議事録 (gijiroku) trong 30 phút.
+
+### 🛠️ Tools sử dụng
+
+**Trong lúc meeting:**
+- **Felo Translator** — Real-time subtitle dịch JP → VN ngay trên màn hình (hỗ trợ Google Meet, Zoom, Teams)
+- **Microsoft Teams Copilot** — Tự động transcript + tóm tắt meeting + gợi ý action items (nếu dùng Teams)
+
+**Sau meeting:**
+- **Notta / Otter.ai** — Upload recording → auto transcript (JP) → summary
+- **NotebookLM** — Upload transcript → hỏi "Tóm tắt quyết định chính" / "Liệt kê action items"
+- **ChatGPT / Claude** — Format lại thành 議事録 chuẩn JP
+
+### Workflow gợi ý
+1. **Trong meeting:** Felo chạy real-time subtitle → BrSE focus vào discussion thay vì dịch
+2. **Ngay sau meeting:** Export transcript từ Notta/Teams → paste vào GenAI
+3. **GenAI format** thành 議事録:
+
 \`\`\`
 [CONTEXT] Meeting giữa team offshore VN và khách hàng JP.
-[ACTION] Từ ghi chú bên dưới, viết 議事録 (meeting minutes).
+[ACTION] Từ transcript bên dưới, viết 議事録.
 [FORMAT] 日時 / 参加者 / 議題 / 議論内容 / 決定事項 / 次回アクション（担当者・期限）
-[TONE] Formal, ngắn gọn, dùng である体 hoặc ですます体 nhất quán.
+[TONE] Formal, ngắn gọn, dùng ですます体 nhất quán.
 ---
-[GHI CHÚ MEETING]
+[TRANSCRIPT]
 \`\`\`
+
+### 💡 Điểm hay
+- Felo subtitle **giảm tải cognitive** — không cần vừa nghe JP vừa dịch vừa ghi chú
+- Meeting transcript **tự động hóa 80% công việc** ghi chép → BrSE chỉ cần review
+- Kết hợp transcript tool + GenAI → **議事録 từ 1h xuống 10 phút**
+
+---
+
+## Case Study D: Luyện kịch bản trước meeting / report quan trọng
+
+> 📂 **Demo files:** [Prompt tạo script](demo-data/case-d-roleplay/01_prompt_tao_script.md) · [AI đóng vai khách hỏi khó](demo-data/case-d-roleplay/02_prompt_roleplay_khach.md) · [Luyện hỏi-đáp + đánh giá](demo-data/case-d-roleplay/03_prompt_luyen_tra_loi.md)
+
+### 📌 Tình huống
+Tuần tới present demo Sprint cho 部長 lần đầu. Lo lắng về: phát âm, keigo, cách trả lời câu hỏi bất ngờ, cách giải thích issue bằng tiếng Nhật.
+
+### 🛠️ Tools sử dụng
+- **ChatGPT Advanced Voice Mode** — Nói chuyện trực tiếp bằng tiếng Nhật, AI phản hồi real-time, sửa phát âm & grammar
+- **ChatGPT / Claude (text)** — Viết script trước → AI review keigo, suggest cải thiện
+- **NotebookLM Audio Overview** — Upload tài liệu demo → nghe podcast-style overview để nắm key points
+
+### Workflow gợi ý
+
+**Bước 1:** Chuẩn bị script
+\`\`\`
+[CONTEXT] BrSE present Sprint demo cho 部長 phía khách.
+[ACTION] Viết script presentation bao gồm:
+1. Greeting + giới thiệu mục tiêu Sprint
+2. Demo 3 tính năng chính (mô tả ngắn gọn)
+3. Known issues + plan
+4. Xin feedback
+[TONE] Lịch sự nhưng tự tin, ですます体.
+\`\`\`
+
+**Bước 2:** AI đóng vai khách hỏi khó
+\`\`\`
+[ROLE] Đóng vai 部長 của công ty khách hàng Nhật Bản. 
+Hãy đặt 5 câu hỏi bằng tiếng Nhật mà 部長 hay hỏi sau buổi demo:
+- Câu hỏi về tiến độ
+- Câu hỏi về risk / issue
+- Câu hỏi về resource
+Dùng ビジネス日本語 thực tế.
+\`\`\`
+
+**Bước 3:** Practice với Voice Mode
+- Đọc script → AI feedback phát âm, nhịp nói
+- Trả lời câu hỏi mẫu → AI đánh giá độ rõ ràng + keigo
+
+### 💡 Điểm hay
+- **Luyện tập không cần người Nhật** — practice bất cứ lúc nào
+- Voice Mode cho **feedback phát âm real-time** — như có tutor riêng
+- Chuẩn bị sẵn câu trả lời cho câu hỏi khó → **tự tin hơn gấp bội** trong meeting thật
+- Áp dụng tương tự cho: report quan trọng, escalation call, proposal presentation
 
 ---
 
 ## Takeaway
-> *"Cung cấp đủ context = AI hiểu đúng situation → output đúng tone. Không context = dịch máy."*
+> *"AI không chỉ là công cụ dịch chữ — AI là partner luyện tập, trợ lý real-time, và chuyên gia keigo riêng của bạn. Kết hợp đúng tool cho đúng tình huống = 10x hiệu quả giao tiếp."*
 `
 },
 {

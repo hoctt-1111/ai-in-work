@@ -126,7 +126,19 @@
       else if (t === '🟡 Cần xử lý') td.parentElement.classList.add('level-caution');
       else if (t === '🔴 Cấm') td.parentElement.classList.add('level-danger');
     });
-  }
+    // Style demo-links blockquotes and route links through viewer.html
+    sectionContent.querySelectorAll('blockquote').forEach(function (bq) {
+      var links = bq.querySelectorAll('a[href*="demo-data/"]');
+      if (links.length > 0) {
+        bq.classList.add('demo-links');
+        links.forEach(function (a) {
+          var originalHref = a.getAttribute('href');
+          a.setAttribute('href', 'viewer.html?file=' + encodeURIComponent(originalHref));
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener');
+        });
+      }
+    });  }
 
   // --- Update UI state ---
   function updateUI() {
