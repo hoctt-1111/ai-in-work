@@ -9,7 +9,11 @@ const SECTIONS = [
   time: '—',
   icon: '🏠',
   markdown: `
-## Ứng dụng AI thực chiến cho BrSE・Comtor trong dự án phần mềm Nhật Bản
+<div class="overview-hero">
+  <img src="logos/cevc4-logo-white-full.png" alt="CEVC4" class="hero-logo hero-logo-dark">
+  <img src="logos/cevc4-logo-black-full.png" alt="CEVC4" class="hero-logo hero-logo-light">
+  <h2 class="hero-title">Ứng dụng AI thực chiến cho BrSE・Comtor<br>trong dự án phần mềm Nhật Bản</h2>
+</div>
 
 ### Mục đích buổi sharing
 
