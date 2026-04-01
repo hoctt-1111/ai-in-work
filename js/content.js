@@ -42,12 +42,11 @@ const SECTIONS = [
 | 1 | 🌏 Bối cảnh: Vai trò BrSE/Comtor & AI là "must-have" | 10 phút |
 | 2 | 🔒 Nguyên tắc Vàng: Bảo mật & Compliance | 10 phút |
 | 3 | ✉️ Case Study 1 — Giao tiếp khách hàng bằng tiếng Nhật | 15 phút |
-| 4 | 📑 Case Study 2 — Đọc hiểu, Tóm tắt & Confirm Spec | 15 phút |
-| 5 | 📝 Case Study 3 — Viết Specification & Tài liệu | 10 phút |
-| 6 | 📋 Case Study 4 — Quản lý dự án với AI | 10 phút |
-| 7 | 🎯 Kỹ thuật Prompt — Framework CRAFT | 15 phút |
-| 8 | ✅ Quy trình Hậu kiểm — AI output ≠ Final output | 5 phút |
-| 9 | 🚀 Closing — Lộ trình áp dụng & Tài nguyên | 5 phút |
+| 4 | 📑 Case Study 2 — Đọc hiểu & Viết Specification | 20 phút |
+| 5 | 📋 Case Study 3 — Quản lý dự án với AI | 10 phút |
+| 6 | 🎯 Kỹ thuật Prompt — Framework CRAFT | 15 phút |
+| 7 | ✅ Quy trình Hậu kiểm — AI output ≠ Final output | 5 phút |
+| 8 | 🚀 Closing — Lộ trình áp dụng & Tài nguyên | 5 phút |
 
 ---
 
@@ -453,22 +452,128 @@ Dùng ビジネス日本語 thực tế.
 },
 {
   id: 5,
-  title: 'Case Study 2 — Đọc hiểu, Tóm tắt & Confirm Spec',
-  shortTitle: 'Đọc hiểu Spec',
-  time: '15 phút',
+  title: 'Case Study 2 — Đọc hiểu & Viết Specification',
+  shortTitle: 'Spec',
+  time: '20 phút',
   icon: '📑',
   markdown: `
 ## Dữ liệu Survey
 - **10/12** dùng AI tóm tắt spec dài
-- **10/12** dùng AI giải thích thuật ngữ khó
+- **7/12** viết mô tả chức năng
 - **6/12** dùng AI tạo câu hỏi confirm với khách
+- **6/12** chuẩn hóa format tài liệu
+- **4/12** viết Acceptance Criteria
 
 ## Khó khăn thực tế
 > "30 trang spec nhận cuối ngày, sáng mai cần Q&A list — đọc không kịp, sợ bỏ sót"
+> "Phải viết spec/AC bằng tiếng Nhật chuẩn format khách yêu cầu — tốn cả ngày cho vài trang"
+
+Trong offshore, spec là **"source of truth" duy nhất**. Hiểu sai 1 dòng spec = cả team dev đi sai hướng = rework = cost phát sinh = mất trust. Phần này đi theo đúng luồng công việc: **Nhận spec → Hiểu → Confirm → Viết → Chuẩn hóa → Estimate → Review**.
 
 ---
 
-## Case Study A: Tóm tắt spec dài — Chain Prompting
+## Hết thời "Paste spec vào prompt"
+
+### ❌ Vấn đề với cách paste truyền thống
+- **Context limit** — spec 25+ trang không paste nổi vào 1 prompt
+- **Mất thời gian anonymize** — phải xử lý thủ công mỗi lần paste
+- **Không có persistent context** — mỗi chat mới phải paste lại từ đầu
+
+### ✅ Giải pháp: Dùng tool có thể đọc file trực tiếp
+
+| Tool | Cách hoạt động | Ai nên dùng |
+| --- | --- | --- |
+| **📓 NotebookLM** | Upload file (PDF, Docs, text) làm **Sources** → AI đọc toàn bộ, query bao nhiêu lần tùy ý | BrSE / Comtor — không cần IDE |
+| **🤖 GitHub Copilot** | Mở folder dự án trong VS Code → Copilot đọc trực tiếp các file spec, format mẫu, glossary trong workspace | BrSE / Dev dùng VS Code |
+
+---
+
+### 🔒 Lợi thế bảo mật — Liên kết với phần Bảo mật (#2)
+
+> **NotebookLM** (Google Workspace) và **GitHub Copilot Business** đều cam kết **KHÔNG dùng data để training model**.
+>
+> Điều này có nghĩa: với các dự án cho phép dùng tool enterprise, bạn có thể **upload/mở spec gốc mà không cần anonymize** — tiết kiệm bước xử lý thủ công tốn thời gian nhất.
+>
+> ⚠️ Vẫn cần confirm với PM / khách hàng rằng dự án cho phép dùng tool cụ thể. Tham khảo checklist ở phần **Bảo mật & Compliance**.
+
+---
+
+### Workflow tổng quan
+
+\`\`\`
+📁 Folder dự án
+│   spec_v2.md
+│   format_mau.md
+│   glossary.md
+│   user_registration_spec.md
+│   ...
+│
+├──→ 📓 NotebookLM
+│       Upload các file làm Sources
+│       → Query bao nhiêu lần tùy ý
+│       → Cross-reference nhiều docs cùng lúc
+│
+└──→ 🤖 GitHub Copilot (VS Code)
+        Mở folder trong VS Code → Copilot Chat
+        → Attach 1 hay nhiều file cùng lúc
+        → Copilot đọc trực tiếp, không cần paste
+\`\`\`
+
+---
+
+### Setup NotebookLM (1 phút)
+
+\`\`\`
+1. Truy cập notebooklm.google.com
+2. Tạo Notebook mới → đặt tên theo dự án
+3. Click "Add Sources" → upload các file:
+   - Spec gốc (PDF / Google Docs)
+   - Format mẫu (基本設計書 template)
+   - Glossary (bảng thuật ngữ)
+4. Đợi AI xử lý sources → sẵn sàng query
+\`\`\`
+
+> 💡 **Tip:** Upload toàn bộ spec cũ của dự án → NotebookLM tự hiểu context, thuật ngữ, và pattern viết của khách hàng.
+
+---
+
+### Setup GitHub Copilot — Folder dự án trong Workspace (2 phút)
+
+**Bước 1:** Tạo folder chứa tài liệu dự án
+\`\`\`
+project-abc/
+├── specs/
+│   ├── 基本設計書_v2.md
+│   ├── user_registration_spec.md
+│   └── search_feature_spec.md
+├── templates/
+│   └── format_mau_基本設計書.md
+├── glossary.md
+└── ...
+\`\`\`
+
+**Bước 2:** Mở folder trong VS Code → dùng Copilot Chat
+
+**Attach file:** Trong Copilot Chat, bấm 📎 hoặc gõ \`#file:\` để chọn 1 hay nhiều file:
+\`\`\`
+#file:specs/基本設計書_v2.md
+#file:glossary.md
+
+[Prompt của bạn ở đây]
+\`\`\`
+
+**Scan toàn bộ folder:** Dùng \`@workspace\` để Copilot tự tìm file liên quan:
+\`\`\`
+@workspace [Prompt của bạn ở đây]
+\`\`\`
+
+> 💡 **Tip:** Tổ chức tài liệu sẵn trong folder → input nhiều file cùng lúc dễ dàng, không cần copy-paste bất kỳ thứ gì.
+
+---
+
+## Case A: Tóm tắt spec dài
+
+> 📂 **Demo files:** [Spec đầy đủ JP (基本設計書)](demo-data/case-spec/case-a-summarize/01_spec_full_jp.md) · [Prompt mẫu](demo-data/case-spec/case-a-summarize/02_prompt.md)
 
 ### Tình huống
 Nhận 基本設計書 (spec thiết kế cơ bản) 25 trang cho module mới. Cần hiểu nhanh scope và chuyển brief cho team dev.
@@ -476,60 +581,70 @@ Nhận 基本設計書 (spec thiết kế cơ bản) 25 trang cho module mới. 
 ### ❌ Cách thông thường
 Đọc lướt → ghi chú rời rạc → dễ bỏ sót
 
-### ✅ Cách dùng AI: Chain prompting
+### ✅ NotebookLM — Upload spec → query trực tiếp
 
-**Bước 1** — Tóm từng section:
-\`\`\`
-Tóm tắt section sau của spec theo cấu trúc:
-- Mục tiêu của section
-- Chức năng chính
-- Điều kiện / ràng buộc
-- Điểm cần lưu ý cho developer
----
-[PASTE SECTION - đã anonymize]
-\`\`\`
+**Sources:** Upload 基本設計書 (PDF/Docs)
 
-**Bước 2** — Tổng hợp overview:
+**Prompt:** _(không cần paste spec — AI đã đọc từ sources)_
 \`\`\`
-Dựa trên các tóm tắt section ở trên, tổng hợp:
-1. Overview toàn bộ spec (3-5 câu)
+Tóm tắt toàn bộ spec theo cấu trúc:
+1. Overview (3-5 câu)
 2. Danh sách chức năng chính
-3. Các điểm cần confirm với khách hàng
-4. Các risk / điểm chưa rõ cần làm rõ
+3. Điều kiện / ràng buộc quan trọng
+4. Các điểm cần confirm với khách hàng
+5. Risk / điểm chưa rõ cần làm rõ
+6. Điểm cần lưu ý cho developer
 \`\`\`
 
+### ✅ GitHub Copilot — File trong workspace
+
+\`\`\`
+#file:specs/基本設計書_v2.md
+
+Tóm tắt spec này theo cấu trúc:
+1. Overview (3-5 câu)
+2. Danh sách chức năng chính
+3. Điều kiện / ràng buộc quan trọng
+4. Các điểm cần confirm với khách hàng
+5. Risk / điểm chưa rõ
+\`\`\`
+
+### Giá trị
+- Spec 25 trang → structured summary 1-2 trang
+- Tiết kiệm **60-70%** thời gian đọc hiểu
+- Không cần paste, không cần anonymize (nếu dùng tool enterprise)
+
 ---
 
-## Case Study B: Giải thích thuật ngữ chuyên ngành
+## Case B: Tạo câu hỏi confirm chất lượng cao
+
+> 📂 **Demo files:** [Spec đăng ký user](demo-data/case-spec/case-b-confirm-questions/01_user_registration_spec.md) · [Prompt + gợi ý đáp án](demo-data/case-spec/case-b-confirm-questions/02_prompt.md)
 
 ### Tình huống
-Spec hệ thống nông nghiệp có thuật ngữ không có trong từ điển thông thường.
+Spec chức năng "Đăng ký người dùng" — đọc xong thấy "ổn" nhưng linh cảm có điểm chưa rõ. Không biết bắt đầu hỏi từ đâu.
 
-| Thuật ngữ | Từ điển | AI có context |
-| --- | --- | --- |
-| 圃場管理 | Quản lý cánh đồng | Farm plot management — quản lý thông tin từng thửa ruộng |
-| 防除暦 | Lịch phòng trừ | Pest control calendar — lịch phun thuốc theo mùa vụ |
-| 出荷予定 | Dự định xuất hàng | Shipment schedule — kế hoạch thu hoạch + giao hàng |
+### ✅ NotebookLM
 
----
+**Sources:** Spec chức năng đã upload
 
-## Case Study C: Tạo câu hỏi confirm chất lượng cao
-
-### Tình huống
-Spec chức năng "Đăng ký người dùng" — đọc xong thấy "ổn" nhưng linh cảm có điểm chưa rõ.
-
-### Prompt — AI đóng vai QA reviewer
 \`\`\`
 Đóng vai QA reviewer có kinh nghiệm 10 năm trong dự án Nhật Bản.
-Đọc spec chức năng sau và liệt kê:
+Đọc spec chức năng đăng ký người dùng trong sources và liệt kê:
 1. Các điểm mơ hồ (ambiguous)
 2. Thông tin thiếu (missing information)
-3. Các điểm có thể hiểu nhiều cách (multiple interpretations)
+3. Các điểm có thể hiểu nhiều cách
 
-Format output dạng bảng: 
-No. / 項目 / 不明点 / 確認したい内容
----
-[PASTE SPEC - đã anonymize]
+Format: bảng No. / 項目 / 不明点 / 確認したい内容
+\`\`\`
+
+### ✅ GitHub Copilot — Attach file từ workspace
+
+\`\`\`
+#file:specs/user_registration_spec.md
+
+Đóng vai QA reviewer 10 năm kinh nghiệm dự án JP.
+Liệt kê các điểm mơ hồ, thông tin thiếu, và điểm hiểu nhiều cách.
+Format: bảng No. / 項目 / 不明点 / 確認したい内容
 \`\`\`
 
 ### Output mẫu
@@ -540,47 +655,48 @@ No. / 項目 / 不明点 / 確認したい内容
 | 2 | メール認証 | 有効期限が未定義 | 認証リンクの有効期限は何時間でしょうか |
 | 3 | エラー処理 | 重複メールの挙動未記載 | 既存メールの場合どう表示しますか |
 
----
-
-## Takeaway
-> *"AI không thay bạn đọc spec — AI giúp bạn đọc NHANH HƠN và KHÔNG BỎ SÓT."*
-`
-},
-{
-  id: 6,
-  title: 'Case Study 3 — Viết Specification & Tài liệu',
-  shortTitle: 'Viết Spec',
-  time: '10 phút',
-  icon: '📝',
-  markdown: `
-## Dữ liệu Survey
-- **7/12** viết mô tả chức năng
-- **7/12** dịch spec sang tiếng Nhật
-- **6/12** chuẩn hóa format tài liệu
-- **4/12** viết Acceptance Criteria = **1/12** so sánh version spec
-
-## Khó khăn thực tế
-> "Phải viết spec/AC bằng tiếng Nhật chuẩn format khách yêu cầu — tốn cả ngày cho vài trang"
+### Giá trị
+- Phát hiện vấn đề **TRƯỚC KHI** dev bắt tay làm = tiết kiệm cost gấp nhiều lần
+- Câu hỏi có cấu trúc, format chuẩn JP → khách dễ trả lời
 
 ---
 
-## Case Study A: Từ yêu cầu mơ hồ → Spec + AC
+## Case C: Từ yêu cầu mơ hồ → Spec + AC
+
+> 📂 **Demo files:** [Spec cũ (reference format)](demo-data/case-spec/case-c-vague-to-spec/01_existing_feature_spec.md) · [Yêu cầu mơ hồ từ khách](demo-data/case-spec/case-c-vague-to-spec/02_vague_request.md) · [Prompt mẫu](demo-data/case-spec/case-c-vague-to-spec/03_prompt.md)
 
 ### Tình huống
-Khách gửi qua chat: "画面に検索機能を追加してほしい。条件は3つくらいで" _(Muốn thêm chức năng tìm kiếm, khoảng 3 điều kiện)_
+Khách gửi qua chat: "画面に検索機能を追加してほしい。条件は3つくらいで" _(Muốn thêm chức năng tìm kiếm, khoảng 3 điều kiện)_ — Yêu cầu mơ hồ, nhưng BrSE phải viết thành functional description + AC rõ ràng.
 
-### Prompt
+### ✅ NotebookLM — Có spec cũ làm reference
+
+**Sources:** Spec chức năng khác đã implement (làm reference pattern)
+
 \`\`\`
-[CONTEXT] Dự án EC system cho khách JP. Đang ở phase 詳細設計.
-[ACTION] Từ yêu cầu khách bên dưới, viết mô tả chức năng (機能説明).
-Bao gồm: 概要, 検索条件, 検索結果表示, エラー処理.
-[FORMAT] Tiếng Nhật, format 詳細設計書.
----
-Yêu cầu: 画面に検索機能を追加してほしい。条件は3つくらいで
-Màn hình hiện tại: Danh sách sản phẩm, có 500+ items
+Dựa trên format và mức độ chi tiết của các spec chức năng khác trong sources, 
+viết spec mới cho yêu cầu sau:
+
+Yêu cầu khách: 「画面に検索機能を追加してほしい。条件は3つくらいで」
+Màn hình hiện tại: Danh sách sản phẩm, 500+ items
+
+Bao gồm:
+1. 機能説明: 概要, 検索条件, 検索結果表示, エラー処理
+2. Acceptance Criteria (Given-When-Then, cả normal + edge case)
+Format: tiếng Nhật, đúng style spec trong sources.
 \`\`\`
 
-### Output mẫu — Acceptance Criteria
+### ✅ GitHub Copilot — Attach file reference từ workspace
+
+\`\`\`
+#file:specs/existing_feature_spec.md
+
+Dựa trên format file trên, viết spec chức năng mới:
+Yêu cầu: 「画面に検索機能を追加してほしい。条件は3つくらいで」
+Màn hình hiện tại: Danh sách sản phẩm, 500+ items.
+Bao gồm: 機能説明 + Acceptance Criteria (Given-When-Then).
+\`\`\`
+
+### Output mẫu AC
 \`\`\`
 【AC-1】正常検索
   Given: ユーザーが検索画面を表示している
@@ -590,52 +706,169 @@ Màn hình hiện tại: Danh sách sản phẩm, có 500+ items
 【AC-2】検索条件なし
   Given: ユーザーが検索画面を表示している
   When: 条件を入力せずに検索ボタンを押す
-  Then: エラーメッセージが表示される
+  Then: エラーメッセージ「検索条件を1つ以上入力してください」が表示される
 \`\`\`
 
+### 💡 Điểm hay
+- NotebookLM tự học **style viết spec** của dự án từ sources → output consistent
+- Copilot dùng file reference → output match format team đang dùng
+
 ---
 
-## Case Study B: Dịch & chuẩn hóa theo format mẫu
+## Case D: Generate spec theo format mẫu
 
-### Prompt
+> 📂 **Demo files:** [Spec tiếng Việt](demo-data/case-spec/case-d-format-translate/01_spec_vn.md) · [Format mẫu JP](demo-data/case-spec/case-d-format-translate/02_format_template.md) · [Glossary](demo-data/case-spec/case-d-format-translate/03_glossary.md) · [Prompt mẫu](demo-data/case-spec/case-d-format-translate/04_prompt.md)
+
+### Tình huống
+Team VN viết spec tiếng Việt, cần chuyển sang JP đúng format 基本設計書 của khách.
+
+### ✅ NotebookLM — Upload 3 files cùng lúc
+
+**Sources:**
+- 📄 Spec tiếng Việt (cần dịch)
+- 📋 Format mẫu 基本設計書 (từ khách)
+- 📝 Bảng glossary dự án
+
 \`\`\`
-[ACTION] Dịch tài liệu spec sau sang tiếng Nhật.
-[FORMAT] Tuân theo format mẫu bên dưới. Giữ nguyên heading structure.
-[GLOSSARY] 
-  - Đăng ký → 登録
-  - Người dùng → ユーザー  
-  - Xác thực → 認証
----
-[SPEC TIẾNG VIỆT]
----
-[FORMAT MẪU từ khách]
+Dịch spec tiếng Việt trong sources sang tiếng Nhật.
+- Tuân theo format mẫu 基本設計書 trong sources
+- Giữ nguyên heading structure
+- Dùng ĐÚNG thuật ngữ trong bảng glossary sources
+- Thuật ngữ không có trong glossary → dịch + đánh dấu [?]
 \`\`\`
+
+### ✅ GitHub Copilot — Attach nhiều file cùng lúc
+
+\`\`\`
+#file:specs/spec_vn.md
+#file:templates/format_mau_基本設計書.md
+#file:glossary.md
+
+Dịch spec tiếng Việt (file 1) sang tiếng Nhật.
+Tuân theo format mẫu (file 2). Dùng thuật ngữ từ glossary (file 3).
+\`\`\`
+
+### Giá trị
+- **Một prompt, 3 file input** — không cần paste + format thủ công
+- Output gần final quality — thuật ngữ nhất quán, đúng format khách
 
 ---
 
-## Case Study C: So sánh version spec
+## Case E: Tạo estimation breakdown từ spec
 
-### Prompt
+> 📂 **Demo files:** [Spec 棚卸機能](demo-data/case-spec/case-e-estimation/01_stocktaking_spec.md) · [Prompt mẫu](demo-data/case-spec/case-e-estimation/02_prompt.md)
+
+### Tình huống
+PM khách hỏi: "見積もりをお願いします" (Xin estimation). BrSE cần phân tách spec thành task list + estimate man-day — thường tốn nửa ngày.
+
+### ✅ NotebookLM
+
+**Sources:** Spec chức năng cần estimate
+
 \`\`\`
-So sánh 2 version spec bên dưới.
-Liệt kê CHỈ các thay đổi về nghiệp vụ (KHÔNG liệt kê typo, format change).
-Đánh giá impact: High / Medium / Low.
-Format: No. / 変更箇所 / 変更内容 / 影響度 / 備考
----
-[VERSION 2.0]
----
-[VERSION 2.1]
+Từ spec chức năng trong sources, phân tách thành danh sách task.
+Context: Team 4 developers (2 senior, 2 junior).
+Mỗi task gồm: タスク名 / 工程(設計/実装/テスト/レビュー) / 複雑度(H/M/L) / 工数(人日 min-max) / 依存 / 備考
+Format: bảng tiếng Nhật, paste được vào Excel.
 \`\`\`
+
+### ✅ GitHub Copilot — Attach file spec
+
+\`\`\`
+#file:specs/search_feature_spec.md
+
+Phân tách spec này thành task list để estimate.
+Team: 4 devs (2 senior, 2 junior).
+Format bảng: タスク名 / 工程 / 複雑度 / 工数(人日) / 依存 / 備考
+\`\`\`
+
+### Output mẫu
+
+| No. | タスク名 | 工程 | 複雑度 | 工数(人日) | 依存 | 備考 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 検索画面 設計 | 設計 | M | 0.5 - 1.0 | — | UI仕様の確認必要 |
+| 2 | 検索API実装 | 実装 | H | 1.0 - 2.0 | #1 | パフォーマンス考慮 |
+| 3 | フロントエンド実装 | 実装 | M | 1.0 - 1.5 | #1 | レスポンシブ対応 |
+| 4 | 単体テスト | テスト | M | 0.5 - 1.0 | #2,#3 | 境界値テスト含む |
+| 5 | 結合テスト | テスト | M | 0.5 - 1.0 | #4 | — |
+
+> ⚠️ **Lưu ý:** AI estimate chỉ là **reference point**. BrSE cần adjust dựa trên kinh nghiệm team thực tế, skill level, và context dự án.
+
+---
+
+## Case F: Review spec — Check logic consistency
+
+> 📂 **Demo files:** [User Management](demo-data/case-spec/case-f-review-logic/01_user_management_screen.md) · [Warehousing](demo-data/case-spec/case-f-review-logic/02_warehousing_screen.md) · [Shipping](demo-data/case-spec/case-f-review-logic/03_shipping_screen.md) · [Shelf Life](demo-data/case-spec/case-f-review-logic/04_shelf_life_screen.md) · [Prompt + Đáp án](demo-data/case-spec/case-f-review-logic/05_prompt_and_answers.md)
+
+### Tình huống
+Spec 20+ trang, nhiều section viết bởi nhiều người → có thể mâu thuẫn giữa các screen, business rule conflict, edge case chưa cover.
+
+### ✅ NotebookLM — Cross-reference nhiều section cùng lúc ⭐
+
+**Sources:** Upload TẤT CẢ sections của spec (đây là điểm mạnh nhất của NotebookLM — cross-reference)
+
+\`\`\`
+Đọc toàn bộ spec trong sources và kiểm tra:
+1. Mâu thuẫn logic giữa các section/screen
+2. Business rule conflict
+3. Edge case chưa được đề cập
+4. Thiếu error handling
+
+Format bảng: No. / 箇所 / 問題種別 / 詳細 / 重要度(H/M/L) / 推奨対応
+\`\`\`
+
+### ✅ GitHub Copilot — Attach toàn bộ folder specs
+
+\`\`\`
+#file:specs/user_registration_spec.md
+#file:specs/search_feature_spec.md
+#file:specs/order_flow_spec.md
+
+Kiểm tra toàn bộ spec files đính kèm:
+1. Mâu thuẫn logic giữa các screen/section
+2. Business rule conflict
+3. Edge case thiếu
+4. Error handling thiếu
+Format: bảng No. / 箇所 / 問題種別 / 詳細 / 重要度 / 推奨対応
+\`\`\`
+
+> 💡 Hoặc dùng \`@workspace\` để Copilot tự tìm mọi file spec trong project.
+
+### Output mẫu
+
+| No. | 箇所 | 問題種別 | 詳細 | 重要度 | 推奨対応 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 画面A vs 画面C | ロジック矛盾 | 画面Aでは電話番号が必須、画面Cでは任意 | H | 仕様統一の確認 |
+| 2 | 注文フロー | エッジケース不足 | 在庫切れ時のカート内商品の扱い未定義 | H | フロー追記 |
+| 3 | ユーザー権限 | ルール不整合 | 管理者権限の定義が画面間で異なる | M | 権限マトリクス作成 |
+
+### 💡 Vì sao Case F đặc biệt phù hợp NotebookLM / Copilot multi-file?
+- Cần **cross-reference TOÀN BỘ** spec → paste thủ công bất khả thi
+- NotebookLM giữ TẤT CẢ sources trong context → phát hiện mâu thuẫn cross-section
+- Copilot attach nhiều file → so sánh chéo giữa các spec
+
+---
+
+## Chọn tool nào cho case nào?
+
+| Case | NotebookLM | Copilot (attach file từ workspace) |
+| --- | --- | --- |
+| A. Tóm tắt spec | ⭐ Recommended | ✅ Tốt |
+| B. Câu hỏi confirm | ⭐ Recommended | ✅ Tốt |
+| C. Mơ hồ → Spec + AC | ⭐ (có spec cũ reference) | ✅ (attach file reference) |
+| D. Spec theo format mẫu | ⭐ (multi-source) | ⭐ (attach nhiều file cùng lúc) |
+| E. Estimation breakdown | ✅ Tốt | ✅ Tốt |
+| F. Review logic | ⭐⭐ Best (cross-reference) | ⭐ (attach nhiều file) |
 
 ---
 
 ## Takeaway
-> *"Cung cấp format mẫu + glossary cho AI = output gần final quality. Tiết kiệm 60-70% thời gian."*
+> *"Đừng paste spec vào prompt — hãy để tool ĐỌC spec cho bạn. NotebookLM cho BrSE cần đọc-hiểu-viết nhanh, Copilot cho dev workflow tích hợp. Cả hai đều an toàn hơn, nhanh hơn, và mạnh hơn cách paste truyền thống."*
 `
 },
 {
-  id: 7,
-  title: 'Case Study 4 — Quản lý dự án với AI',
+  id: 6,
+  title: 'Case Study 3 — Quản lý dự án với AI',
   shortTitle: 'Quản lý',
   time: '10 phút',
   icon: '📋',
@@ -716,7 +949,7 @@ PM khách hỏi: "全体の進捗はどうですか？" — cần trả lời nh
 `
 },
 {
-  id: 8,
+  id: 7,
   title: 'Kỹ thuật Prompt — Framework CRAFT',
   shortTitle: 'Prompt CRAFT',
   time: '15 phút',
@@ -816,7 +1049,7 @@ Dịch cái này sang tiếng Nhật
 `
 },
 {
-  id: 9,
+  id: 8,
   title: 'Quy trình Hậu kiểm — AI output ≠ Final output',
   shortTitle: 'Hậu kiểm',
   time: '5 phút',
@@ -889,7 +1122,7 @@ Dịch cái này sang tiếng Nhật
 `
 },
 {
-  id: 10,
+  id: 9,
   title: 'Closing — Lộ trình áp dụng & Tài nguyên',
   shortTitle: 'Closing',
   time: '5 phút',
@@ -902,10 +1135,11 @@ Dịch cái này sang tiếng Nhật
 | Lo bảo mật, không dám dùng | Phân loại data + Anonymize + Checklist | #2 |
 | Sợ sai keigo, tone email | Context + prompt template + so sánh output | #3 |
 | Spec dài, đọc không kịp | Chain prompting + structured summary | #4 |
-| Spec mơ hồ, không biết hỏi gì | AI đóng vai QA reviewer | #4 |
-| Viết tài liệu JP tốn thời gian | AI sinh draft + format mẫu + glossary | #5 |
-| Report thủ công, tốn thời gian | Multi-source → report + risk analysis | #6 |
-| Prompt kém, output sai | Framework CRAFT + hậu kiểm 3 bước | #7,8 |
+| Spec mơ hồ, không biết hỏi gì | AI đóng vai QA reviewer + confirm questions | #4 |
+| Viết spec/AC tốn thời gian | AI sinh draft + format mẫu + glossary | #4 |
+| Estimation & review spec | AI breakdown task + check logic consistency | #4 |
+| Report thủ công, tốn thời gian | Multi-source → report + risk analysis | #5 |
+| Prompt kém, output sai | Framework CRAFT + hậu kiểm 3 bước | #6,7 |
 
 ---
 
