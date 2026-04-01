@@ -226,7 +226,7 @@ Người phụ trách: 部長 level phía khách hàng
 
 ## Case Study A: Soạn & kiểm tra Keigo
 
-> 📂 **Demo files:** [Brief tiếng Việt](demo-data/case-a-keigo-email/01_brief_tieng_viet.md) · [Prompt kém ❌](demo-data/case-a-keigo-email/02_prompt_kem.md) · [Prompt CRAFT ✅](demo-data/case-a-keigo-email/03_prompt_craft.md) · [Follow-up giải thích keigo](demo-data/case-a-keigo-email/04_followup_giai_thich.md)
+> 📂 **Demo files:** [Brief tiếng Việt](demo-data/case-study-1/case-a-keigo-email/01_brief_tieng_viet.md) · [Prompt kém ❌](demo-data/case-study-1/case-a-keigo-email/02_prompt_kem.md) · [Prompt CRAFT ✅](demo-data/case-study-1/case-a-keigo-email/03_prompt_craft.md) · [Follow-up giải thích keigo](demo-data/case-study-1/case-a-keigo-email/04_followup_giai_thich.md)
 
 ### 📌 Tình huống
 Sprint delay 3 ngày do requirement thay đổi giữa chừng. Cần gửi email xin lỗi + giải thích + đề xuất plan mới cho 部長 (buchō) phía khách.
@@ -263,7 +263,7 @@ Relationship: [MÔ TẢ].
 
 ## Case Study B: Dịch tài liệu có thuật ngữ chuyên ngành
 
-> 📂 **Demo files:** [Spec gốc JP](demo-data/case-b-glossary-translation/01_sample_spec_jp.md) · [Prompt rút glossary](demo-data/case-b-glossary-translation/02_prompt_rut_glossary.md) · [Glossary mẫu](demo-data/case-b-glossary-translation/03_glossary_output_mau.md) · [Prompt dịch spec](demo-data/case-b-glossary-translation/04_prompt_dich_spec.md) · [Input glossary ChatGPT](demo-data/case-b-glossary-translation/05_input_glossary_chatgpt.md)
+> 📂 **Demo files:** [Spec gốc JP](demo-data/case-study-1/case-b-glossary-translation/01_sample_spec_jp.md) · [Prompt rút glossary](demo-data/case-study-1/case-b-glossary-translation/02_prompt_rut_glossary.md) · [Glossary mẫu](demo-data/case-study-1/case-b-glossary-translation/03_glossary_output_mau.md) · [Prompt dịch spec](demo-data/case-study-1/case-b-glossary-translation/04_prompt_dich_spec.md) · [Input glossary ChatGPT](demo-data/case-study-1/case-b-glossary-translation/05_input_glossary_chatgpt.md)
 
 ### 📌 Tình huống
 Nhận spec hệ thống nông nghiệp từ khách chứa nhiều thuật ngữ domain-specific (圃場管理, 防除暦, 出荷予定). Cần dịch chính xác sang tiếng Việt cho team dev hiểu, và ngược lại dịch Q&A sang tiếng Nhật cho khách.
@@ -362,7 +362,7 @@ Thuật ngữ không có trong bảng → dịch tự nhiên + đánh dấu [?] 
 
 ## Case Study C: Meeting translate & Meeting recording
 
-> 📂 **Demo files:** [Transcript cuộc họp](demo-data/case-c-meeting/01_meeting_transcript.md) · [Prompt tạo 議事録](demo-data/case-c-meeting/02_prompt_gijiroku.md) · [Prompt tóm tắt cho dev](demo-data/case-c-meeting/03_prompt_summary_cho_dev.md)
+> 📂 **Demo files:** [Transcript cuộc họp](demo-data/case-study-1/case-c-meeting/01_meeting_transcript.md) · [Prompt tạo 議事録](demo-data/case-study-1/case-c-meeting/02_prompt_gijiroku.md) · [Prompt tóm tắt cho dev](demo-data/case-study-1/case-c-meeting/03_prompt_summary_cho_dev.md)
 
 ### 📌 Tình huống
 Cuộc họp 1 tiếng với khách JP — BrSE cần vừa nghe, vừa ghi chú, vừa translate cho dev team. Sau meeting phải viết 議事録 (gijiroku) trong 30 phút.
@@ -401,7 +401,7 @@ Cuộc họp 1 tiếng với khách JP — BrSE cần vừa nghe, vừa ghi chú
 
 ## Case Study D: Luyện kịch bản trước meeting / report quan trọng
 
-> 📂 **Demo files:** [Prompt tạo script](demo-data/case-d-roleplay/01_prompt_tao_script.md) · [AI đóng vai khách hỏi khó](demo-data/case-d-roleplay/02_prompt_roleplay_khach.md) · [Luyện hỏi-đáp + đánh giá](demo-data/case-d-roleplay/03_prompt_luyen_tra_loi.md)
+> 📂 **Demo files:** [Prompt tạo script](demo-data/case-study-1/case-d-roleplay/01_prompt_tao_script.md) · [AI đóng vai khách hỏi khó](demo-data/case-study-1/case-d-roleplay/02_prompt_roleplay_khach.md) · [Luyện hỏi-đáp + đánh giá](demo-data/case-study-1/case-d-roleplay/03_prompt_luyen_tra_loi.md)
 
 ### 📌 Tình huống
 Tuần tới present demo Sprint cho 部長 lần đầu. Lo lắng về: phát âm, keigo, cách trả lời câu hỏi bất ngờ, cách giải thích issue bằng tiếng Nhật.
@@ -573,7 +573,7 @@ project-abc/
 
 ## Case A: Tóm tắt spec dài
 
-> 📂 **Demo files:** [Spec đầy đủ JP (基本設計書)](demo-data/case-spec/case-a-summarize/01_spec_full_jp.md) · [Prompt mẫu](demo-data/case-spec/case-a-summarize/02_prompt.md)
+> 📂 **Demo files:** [Spec đầy đủ JP (基本設計書)](demo-data/case-study-2/case-a-summarize/01_spec_full_jp.md) · [Prompt mẫu](demo-data/case-study-2/case-a-summarize/02_prompt.md)
 
 ### Tình huống
 Nhận 基本設計書 (spec thiết kế cơ bản) 25 trang cho module mới. Cần hiểu nhanh scope và chuyển brief cho team dev.
@@ -618,7 +618,7 @@ Tóm tắt spec này theo cấu trúc:
 
 ## Case B: Tạo câu hỏi confirm chất lượng cao
 
-> 📂 **Demo files:** [Spec đăng ký user](demo-data/case-spec/case-b-confirm-questions/01_user_registration_spec.md) · [Prompt + gợi ý đáp án](demo-data/case-spec/case-b-confirm-questions/02_prompt.md)
+> 📂 **Demo files:** [Spec đăng ký user](demo-data/case-study-2/case-b-confirm-questions/01_user_registration_spec.md) · [Prompt + gợi ý đáp án](demo-data/case-study-2/case-b-confirm-questions/02_prompt.md)
 
 ### Tình huống
 Spec chức năng "Đăng ký người dùng" — đọc xong thấy "ổn" nhưng linh cảm có điểm chưa rõ. Không biết bắt đầu hỏi từ đâu.
@@ -663,7 +663,7 @@ Format: bảng No. / 項目 / 不明点 / 確認したい内容
 
 ## Case C: Từ yêu cầu mơ hồ → Spec + AC
 
-> 📂 **Demo files:** [Spec cũ (reference format)](demo-data/case-spec/case-c-vague-to-spec/01_existing_feature_spec.md) · [Yêu cầu mơ hồ từ khách](demo-data/case-spec/case-c-vague-to-spec/02_vague_request.md) · [Prompt mẫu](demo-data/case-spec/case-c-vague-to-spec/03_prompt.md)
+> 📂 **Demo files:** [Spec cũ (reference format)](demo-data/case-study-2/case-c-vague-to-spec/01_existing_feature_spec.md) · [Yêu cầu mơ hồ từ khách](demo-data/case-study-2/case-c-vague-to-spec/02_vague_request.md) · [Prompt mẫu](demo-data/case-study-2/case-c-vague-to-spec/03_prompt.md)
 
 ### Tình huống
 Khách gửi qua chat: "画面に検索機能を追加してほしい。条件は3つくらいで" _(Muốn thêm chức năng tìm kiếm, khoảng 3 điều kiện)_ — Yêu cầu mơ hồ, nhưng BrSE phải viết thành functional description + AC rõ ràng.
@@ -717,7 +717,7 @@ Bao gồm: 機能説明 + Acceptance Criteria (Given-When-Then).
 
 ## Case D: Generate spec theo format mẫu
 
-> 📂 **Demo files:** [Spec tiếng Việt](demo-data/case-spec/case-d-format-translate/01_spec_vn.md) · [Format mẫu JP](demo-data/case-spec/case-d-format-translate/02_format_template.md) · [Glossary](demo-data/case-spec/case-d-format-translate/03_glossary.md) · [Prompt mẫu](demo-data/case-spec/case-d-format-translate/04_prompt.md)
+> 📂 **Demo files:** [Spec tiếng Việt](demo-data/case-study-2/case-d-format-translate/01_spec_vn.md) · [Format mẫu JP](demo-data/case-study-2/case-d-format-translate/02_format_template.md) · [Glossary](demo-data/case-study-2/case-d-format-translate/03_glossary.md) · [Prompt mẫu](demo-data/case-study-2/case-d-format-translate/04_prompt.md)
 
 ### Tình huống
 Team VN viết spec tiếng Việt, cần chuyển sang JP đúng format 基本設計書 của khách.
@@ -756,7 +756,7 @@ Tuân theo format mẫu (file 2). Dùng thuật ngữ từ glossary (file 3).
 
 ## Case E: Tạo estimation breakdown từ spec
 
-> 📂 **Demo files:** [Spec 棚卸機能](demo-data/case-spec/case-e-estimation/01_stocktaking_spec.md) · [Prompt mẫu](demo-data/case-spec/case-e-estimation/02_prompt.md)
+> 📂 **Demo files:** [Spec 棚卸機能](demo-data/case-study-2/case-e-estimation/01_stocktaking_spec.md) · [Prompt mẫu](demo-data/case-study-2/case-e-estimation/02_prompt.md)
 
 ### Tình huống
 PM khách hỏi: "見積もりをお願いします" (Xin estimation). BrSE cần phân tách spec thành task list + estimate man-day — thường tốn nửa ngày.
@@ -798,7 +798,7 @@ Format bảng: タスク名 / 工程 / 複雑度 / 工数(人日) / 依存 / 備
 
 ## Case F: Review spec — Check logic consistency
 
-> 📂 **Demo files:** [User Management](demo-data/case-spec/case-f-review-logic/01_user_management_screen.md) · [Warehousing](demo-data/case-spec/case-f-review-logic/02_warehousing_screen.md) · [Shipping](demo-data/case-spec/case-f-review-logic/03_shipping_screen.md) · [Shelf Life](demo-data/case-spec/case-f-review-logic/04_shelf_life_screen.md) · [Prompt + Đáp án](demo-data/case-spec/case-f-review-logic/05_prompt_and_answers.md)
+> 📂 **Demo files:** [User Management](demo-data/case-study-2/case-f-review-logic/01_user_management_screen.md) · [Warehousing](demo-data/case-study-2/case-f-review-logic/02_warehousing_screen.md) · [Shipping](demo-data/case-study-2/case-f-review-logic/03_shipping_screen.md) · [Shelf Life](demo-data/case-study-2/case-f-review-logic/04_shelf_life_screen.md) · [Prompt + Đáp án](demo-data/case-study-2/case-f-review-logic/05_prompt_and_answers.md)
 
 ### Tình huống
 Spec 20+ trang, nhiều section viết bởi nhiều người → có thể mâu thuẫn giữa các screen, business rule conflict, edge case chưa cover.
@@ -882,70 +882,195 @@ Format: bảng No. / 箇所 / 問題種別 / 詳細 / 重要度 / 推奨対応
 ## Khó khăn thực tế
 > "Tổng hợp progress từ Jira, Slack, email rồi viết report mất thời gian — không biết AI giúp gì"
 
----
-
-## Case Study A: Weekly Report tự động
-
-### Prompt
-\`\`\`
-[CONTEXT] Dự án offshore phát triển hệ thống cho khách JP. Sprint 2 tuần.
-[ACTION] Tổng hợp thông tin sau thành Weekly Report.
-[FORMAT] 
-  1. 今週の進捗 (Tiến độ tuần này)
-  2. 課題・リスク (Vấn đề & Risk)
-  3. 来週の予定 (Kế hoạch tuần tới)
-[TONE] Báo cáo cho 部長 level, ビジネス敬語, ngắn gọn.
----
-[RAW DATA từ Jira + Slack + ghi chú]
-\`\`\`
-
-### Giá trị
-- Giảm từ 1-2 tiếng → 15-20 phút
-- Format nhất quán mỗi tuần
+Phần này tập trung vào **NotebookLM** — vì quản lý dự án là **công việc team**, cần tool có thể **share cho cả team cùng dùng**. NotebookLM cho phép tạo notebook chung → BrSE, dev, QA đều truy cập được.
 
 ---
 
-## Case Study B: Risk identification
+## Tại sao NotebookLM cho quản lý dự án?
+
+| Ưu điểm | Giải thích |
+| --- | --- |
+| **Share cho team** | Tạo notebook → share link → cả team query cùng 1 nguồn tài liệu |
+| **Multi-document context** | Upload spec + meeting notes + rules + reports → AI hiểu toàn bộ context dự án |
+| **Persistent** | Sources giữ nguyên → không cần upload lại mỗi lần |
+| **Không cần IDE** | BrSE, Comtor, PM — ai cũng dùng được |
+
+---
+
+## Case A: Onboarding Kit cho member mới
+
+> 📂 **Demo files:** [Project Overview](demo-data/case-study-3/case-a-onboarding/source_01_project_overview.md) · [Coding Conventions](demo-data/case-study-3/case-a-onboarding/source_02_coding_conventions.md) · [Prompt mẫu](demo-data/case-study-3/case-a-onboarding/prompt.md)
 
 ### Tình huống
-2 member nghỉ ốm cùng lúc, đúng tuần deadline.
+Member mới join dự án giữa chừng. BrSE phải brief 1-2 ngày: context, tech stack, quy trình, conventions... Mỗi lần có người mới lại tốn thời gian tương tự.
 
-### Prompt
+### ✅ NotebookLM — Tạo "Senior ảo" cho dự án
+
+**Sources:** Upload tất cả tài liệu dự án:
+- 📄 Spec các chức năng
+- 📋 Wiki / Confluence pages
+- 📝 Coding conventions
+- 📊 Kiến trúc hệ thống
+- 📁 Meeting minutes gần đây
+
+**Prompt:**
 \`\`\`
-[CONTEXT] Dự án offshore, team 5 người, sprint cuối trước release.
-[ACTION] Phân tích tình huống và liệt kê risk + countermeasure.
-[FORMAT] Bảng: No. / リスク内容 / 影響度(H/M/L) / 発生確率(H/M/L) / 対応策
+Từ toàn bộ tài liệu dự án trong sources, tạo tài liệu onboarding cho developer mới.
+Bao gồm:
+1. Tổng quan dự án (mục đích, khách hàng, timeline)
+2. Tech stack & kiến trúc hệ thống
+3. Quy trình làm việc (git flow, review process, deployment)
+4. Thuật ngữ nghiệp vụ quan trọng (glossary top 20)
+5. Danh sách contacts & roles
+6. FAQ — Các câu hỏi thường gặp khi mới join
+Format: Tiếng Việt, dễ đọc, có mục lục.
+\`\`\`
+
+### 💡 Điểm hay
+- Member mới **tự hỏi NotebookLM** bất cứ lúc nào thay vì hỏi BrSE
+- NotebookLM trở thành **"senior ảo"** — trả lời câu hỏi dựa trên toàn bộ tài liệu dự án
+- BrSE chỉ cần review output + bổ sung culture / unwritten rules
+
 ---
-Tình huống: 2/5 member nghỉ ốm. Deadline trong 5 ngày.
-Task còn lại: Unit test (3 ngày), integration test (2 ngày), bug fix.
+
+## Case B: AI trả lời câu hỏi spec & rules tự động
+
+> 📂 **Demo files:** [Prompt mẫu (5 queries)](demo-data/case-study-3/case-b-qa-spec/prompt.md) — Dùng chung specs từ Case Study 2
+
+### Tình huống
+Dev hỏi hàng ngày: "Screen X có cần validate field Y không?", "Rule cho admin role là gì?", "Màn hình A dùng API nào?" → BrSE phải tra lại spec rồi trả lời → chiếm thời gian mỗi ngày.
+
+### ✅ NotebookLM — Share notebook cho team tự tra
+
+**Sources:** Upload TẤT CẢ spec + rule documents + Q&A history
+
+**Share:** Tạo notebook → Share link cho dev team → ai cần thì tự query
+
+**Prompt mẫu (dev tự hỏi):**
+\`\`\`
+Trong spec, chức năng 入庫管理 có validate gì cho trường 入庫数量 không?
+Nếu có, liệt kê: điều kiện validate, error message, và business rule liên quan.
 \`\`\`
 
-### Output mẫu
+\`\`\`
+Rule nào áp dụng cho user role 管理者 khi thực hiện 廃棄登録?
+Cần approval từ ai? Có exception nào không?
+\`\`\`
 
-| No. | リスク内容 | 影響度 | 発生確率 | 対応策 |
-| --- | --- | --- | --- | --- |
-| 1 | テスト工数不足でリリース遅延 | H | H | 残メンバーでタスク再配分 |
-| 2 | テストカバレッジ低下 | M | H | クリティカルパスのテスト優先 |
-| 3 | 引継ぎ工数 | L | M | 作業ログ詳細記録 |
+### 💡 Điểm hay
+- **Giảm tải BrSE**: dev tự tra → chỉ escalate khi AI không trả lời được
+- NotebookLM giữ context toàn bộ spec → trả lời **cross-reference** chính xác
+- Tránh tình huống "spec nói vậy nhưng tôi hiểu khác"
+
+> ⚠️ **Lưu ý:** AI có thể "hallucinate" nội dung không có trong spec. Dev cần verify lại với spec gốc nếu output quan trọng. Tham khảo phần **Hậu kiểm**.
 
 ---
 
-## Case Study C: Status summary cho stakeholder
+## Case C: Weekly Report từ daily report
 
-PM khách hỏi: "全体の進捗はどうですか？" — cần trả lời nhanh, chính xác.
+> 📂 **Demo files:** [Daily T2](demo-data/case-study-3/case-c-weekly-report/source_01_daily_mon.md) · [T3](demo-data/case-study-3/case-c-weekly-report/source_02_daily_tue.md) · [T4](demo-data/case-study-3/case-c-weekly-report/source_03_daily_wed.md) · [T5](demo-data/case-study-3/case-c-weekly-report/source_04_daily_thu.md) · [T6](demo-data/case-study-3/case-c-weekly-report/source_05_daily_fri.md) · [Prompt](demo-data/case-study-3/case-c-weekly-report/prompt.md)
 
+### Tình huống
+Cuối tuần, BrSE đọc 5 bản daily report → tổng hợp tuần báo → viết tiếng Nhật format khách yêu cầu. Tốn 1-2 tiếng mỗi tuần.
+
+### ✅ NotebookLM — Upload 5 daily reports → query tổng hợp
+
+**Sources:** Upload 5 file daily report (thứ 2 → thứ 6)
+
+**Prompt:**
 \`\`\`
-[ACTION] Tổng hợp thông tin thành status summary.
-[FORMAT] Ngắn gọn, 5-7 dòng, tiếng Nhật.
-  全体進捗 → 完了タスク → 進行中 → ブロッカー → 次のアクション
+Tổng hợp 5 bản daily report trong sources thành Weekly Report.
+Format:
+1. 今週の進捗 (Tiến độ tuần này) — tóm tắt accomplishments chính
+2. 課題・リスク (Vấn đề & Risk) — tổng hợp từ các issues trong daily
+3. 来週の予定 (Kế hoạch tuần tới) — dựa trên remaining tasks
+Tone: ビジネス敬語, báo cáo cho 部長 level, ngắn gọn.
+Không bỏ sót issue nào dù nhỏ.
+\`\`\`
+
+### 💡 Điểm hay
+- Giảm từ **1-2 tiếng → 15-20 phút** (chỉ review + adjust)
+- Format **nhất quán** mỗi tuần
+- Không bỏ sót issue nhỏ mà daily reporter coi là minor
+
 ---
-[Jira summary] [Slack discussion] [Email updates]
+
+## Case D: Dashboard effort & workload từ timesheet
+
+> 📂 **Demo files:** [Timesheet CSV](demo-data/case-study-3/case-d-dashboard/source_01_timesheet.csv) · [Jira Export CSV](demo-data/case-study-3/case-d-dashboard/source_02_jira_export.csv) · [Prompt](demo-data/case-study-3/case-d-dashboard/prompt.md)
+
+### Tình huống
+PM khách hỏi "リソースの状況は？" (Tình hình resource?). BrSE cần nắm: ai đang làm gì, effort bao nhiêu, có overload không, task nào bị block.
+
+### ✅ NotebookLM — Upload timesheet + ticket data
+
+**Sources:** Upload file CSV/Excel:
+- 📊 Timesheet tuần (member / task / giờ)
+- 📋 Jira export hoặc task list (status, assignee, estimate)
+
+**Prompt:**
 \`\`\`
+Từ dữ liệu timesheet và task list trong sources, phân tích:
+1. Effort mỗi member (tổng giờ, % so với capacity 40h/week)
+2. Workload balance — ai đang overload (>100%), ai đang rảnh (<70%)
+3. Task status summary — hoàn thành / đang làm / blocked
+4. Gợi ý re-assign nếu có imbalance
+Format: bảng tiếng Nhật, phù hợp paste vào report cho khách.
+\`\`\`
+
+### 💡 Điểm hay
+- **Data-driven** thay vì "cảm tính"
+- Phát hiện bottleneck và overload **sớm**
+- Output paste được vào weekly report hoặc gửi riêng cho PM
+
+---
+
+## Case E: Meeting minutes → Action items tracking
+
+> 📂 **Demo files:** [議事録 #12](demo-data/case-study-3/case-e-action-tracking/source_01_meeting_20250610.md) · [#13](demo-data/case-study-3/case-e-action-tracking/source_02_meeting_20250617.md) · [#14](demo-data/case-study-3/case-e-action-tracking/source_03_meeting_20250624.md) · [#15](demo-data/case-study-3/case-e-action-tracking/source_04_meeting_20250701.md) · [Prompt + Đáp án](demo-data/case-study-3/case-e-action-tracking/prompt.md)
+
+### Tình huống
+Mỗi tuần 2-3 meeting với khách JP. BrSE viết 議事録 → gửi → nhưng action items từ meeting trước thường bị quên follow up. "前回のアクション、進捗は？" mà BrSE không nhớ.
+
+### ✅ NotebookLM — Upload nhiều 議事録 → track xuyên suốt ⭐⭐
+
+**Sources:** Upload 議事録 của 3-4 buổi meeting liên tiếp
+
+**Prompt (chuẩn bị trước meeting tiếp theo):**
+\`\`\`
+Từ 議事録 của 4 buổi meeting gần nhất trong sources:
+1. Liệt kê TẤT CẢ action items từ mỗi meeting
+2. Đánh dấu status:
+   ✅ Đã hoàn thành (meeting sau có mention kết quả)
+   ⏳ Chưa hoàn thành
+   ❓ Không rõ (không được nhắc lại)
+3. Highlight các items quá hạn hoặc chưa được nhắc lại
+Format: bảng No. / Meeting日 / アクション内容 / 担当者 / 期限 / ステータス
+\`\`\`
+
+### 💡 Điểm hay
+- Phát hiện action items bị **"rơi"** qua các meeting
+- BrSE chuẩn bị meeting tiếp theo → biết chính xác cần follow up gì
+- NotebookLM cross-reference nhiều meeting → **không sót item nào**
+
+> Đây là điểm mạnh nhất của NotebookLM — **persistent multi-document context** cho phép track xuyên suốt nhiều meeting.
+
+---
+
+## Tóm tắt: NotebookLM = "Knowledge Base" cho team
+
+| Case | Upload gì | Ai dùng | Giá trị |
+| --- | --- | --- | --- |
+| A. Onboarding | Toàn bộ docs dự án | Member mới | Tự onboard, giảm tải BrSE |
+| B. Q&A Spec | Specs + rules | Dev team | Tự tra spec, giảm hỏi BrSE |
+| C. Weekly Report | 5 daily reports | BrSE | 1-2h → 15 phút |
+| D. Dashboard | Timesheet + tickets | BrSE / PM | Data-driven resource mgmt |
+| E. Action Tracking | 議事録 nhiều meeting | BrSE | Không quên action items |
 
 ---
 
 ## Takeaway
-> *"AI không chỉ giúp ngôn ngữ — AI giúp tư duy quản lý. Report, risk, progress summary — AI làm tốt nếu bạn cung cấp đúng data."*
+> *"NotebookLM không chỉ là tool cá nhân — khi share cho team, nó trở thành knowledge base sống của dự án. Upload tài liệu 1 lần, cả team query mãi mãi."*
 `
 },
 {

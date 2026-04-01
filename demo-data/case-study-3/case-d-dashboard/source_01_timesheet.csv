@@ -1,0 +1,100 @@
+Member,Date,Task,Category,Hours,Note
+Tran T.B,2025/06/09,棚卸一覧 API,Development,5.0,Completed
+Tran T.B,2025/06/09,棚卸登録 API,Development,2.5,Started
+Tran T.B,2025/06/09,Daily meeting,Meeting,0.5,
+Tran T.B,2025/06/10,棚卸登録 API,Development,4.0,Blocked by spec question
+Tran T.B,2025/06/10,Spec investigation rounding,Investigation,2.5,
+Tran T.B,2025/06/10,Code review PR#187,Review,1.0,Le C PR
+Tran T.B,2025/06/10,Daily meeting,Meeting,0.5,
+Tran T.B,2025/06/11,棚卸結果出力 API,Development,6.0,PDF export JasperReports
+Tran T.B,2025/06/11,Daily meeting,Meeting,0.5,
+Tran T.B,2025/06/11,Team support,Support,1.5,Help Pham D with DB
+Tran T.B,2025/06/12,棚卸登録 API,Development,3.0,Updated rounding logic
+Tran T.B,2025/06/12,棚卸結果出力 API,Development,3.5,PDF table format
+Tran T.B,2025/06/12,BUG-305 investigate,Bug fix,1.0,Started
+Tran T.B,2025/06/12,Daily meeting,Meeting,0.5,
+Tran T.B,2025/06/13,棚卸登録 API,Development,2.0,PR submitted
+Tran T.B,2025/06/13,棚卸結果出力 API,Development,2.5,85% done
+Tran T.B,2025/06/13,BUG-305,Bug fix,2.5,Root cause found
+Tran T.B,2025/06/13,Daily meeting,Meeting,0.5,
+Tran T.B,2025/06/13,Sprint review prep,Meeting,0.5,
+Le V.C,2025/06/09,棚卸一覧画面,Development,7.0,70% done
+Le V.C,2025/06/09,Daily meeting,Meeting,0.5,
+Le V.C,2025/06/09,Pagination bug fix,Bug fix,0.5,
+Le V.C,2025/06/10,棚卸一覧画面,Development,3.0,Completed
+Le V.C,2025/06/10,Unit test 棚卸一覧,Testing,3.5,
+Le V.C,2025/06/10,Daily meeting,Meeting,0.5,
+Le V.C,2025/06/10,PR #187 submit,Review,1.0,
+Le V.C,2025/06/11,棚卸登録画面,Development,7.0,Started
+Le V.C,2025/06/11,Daily meeting,Meeting,0.5,
+Le V.C,2025/06/11,Design review,Meeting,0.5,Internal
+Le V.C,2025/06/12,棚卸登録画面,Development,5.0,60% done
+Le V.C,2025/06/12,UI feedback fix,Bug fix,2.0,3 items from review
+Le V.C,2025/06/12,Daily meeting,Meeting,0.5,
+Le V.C,2025/06/12,Rounding rule update,Development,0.5,
+Le V.C,2025/06/13,棚卸登録画面,Development,4.0,80% done
+Le V.C,2025/06/13,UI feedback fix,Bug fix,2.5,Error msg JP + spinner + dialog
+Le V.C,2025/06/13,Daily meeting,Meeting,0.5,
+Le V.C,2025/06/13,Responsive check,Testing,1.0,
+Pham T.D,2025/06/09,Bug fix INV-234,Bug fix,6.0,入庫管理 validation
+Pham T.D,2025/06/09,Unit test,Testing,1.5,
+Pham T.D,2025/06/09,Daily meeting,Meeting,0.5,
+Pham T.D,2025/06/10,DB performance investigate,Investigation,7.0,在庫一覧 query > 3s
+Pham T.D,2025/06/10,Daily meeting,Meeting,0.5,
+Pham T.D,2025/06/10,Document findings,Documentation,0.5,
+Pham T.D,2025/06/11,DB performance fix,Bug fix,5.5,Composite index + query optimize
+Pham T.D,2025/06/11,PR #189 submit,Review,1.0,Index migration
+Pham T.D,2025/06/11,出荷指示 API,Development,1.0,Started
+Pham T.D,2025/06/11,Daily meeting,Meeting,0.5,
+Pham T.D,2025/06/12,出荷指示 API,Development,7.0,50% done
+Pham T.D,2025/06/12,Daily meeting,Meeting,0.5,
+Pham T.D,2025/06/12,Spec confirm with BrSE,Meeting,0.5,出荷指示数 > 在庫数
+Pham T.D,2025/06/13,出荷指示 API,Development,7.0,80% done
+Pham T.D,2025/06/13,Daily meeting,Meeting,0.5,
+Pham T.D,2025/06/13,Code review PR#191,Review,0.5,Tran B PR
+Hoang M.E,2025/06/09,Test case writing 出荷管理,Testing,7.0,15/25 done
+Hoang M.E,2025/06/09,Daily meeting,Meeting,0.5,
+Hoang M.E,2025/06/09,Test env setup,Support,0.5,
+Hoang M.E,2025/06/10,Test case writing 出荷管理,Testing,4.5,25/25 done
+Hoang M.E,2025/06/10,Test execution 出荷管理,Testing,2.5,Found 2 bugs
+Hoang M.E,2025/06/10,Bug report,Documentation,0.5,BUG-301 BUG-302
+Hoang M.E,2025/06/10,Daily meeting,Meeting,0.5,
+Hoang M.E,2025/06/11,Regression test 入庫管理,Testing,7.0,80% done
+Hoang M.E,2025/06/11,Daily meeting,Meeting,0.5,
+Hoang M.E,2025/06/11,Test data prepare,Support,0.5,
+Hoang M.E,2025/06/12,Regression test 入庫管理,Testing,3.0,Completed PASS
+Hoang M.E,2025/06/12,Test execution 棚卸一覧,Testing,4.0,5/12 done
+Hoang M.E,2025/06/12,Daily meeting,Meeting,0.5,
+Hoang M.E,2025/06/12,Evidence capture,Documentation,0.5,
+Hoang M.E,2025/06/13,Test execution 棚卸一覧,Testing,4.0,12/12 PASS
+Hoang M.E,2025/06/13,Test case writing 棚卸登録,Testing,3.0,8/15 done
+Hoang M.E,2025/06/13,Daily meeting,Meeting,0.5,
+Hoang M.E,2025/06/13,Test report update,Documentation,0.5,
+Nguyen V.A,2025/06/09,Daily meeting,Meeting,1.0,Run meeting
+Nguyen V.A,2025/06/09,Spec Q&A 差異理由,Communication,2.0,Prepare question for client
+Nguyen V.A,2025/06/09,Translation & review,Communication,2.0,Review PRs comments
+Nguyen V.A,2025/06/09,Progress tracking,Management,2.0,Jira update
+Nguyen V.A,2025/06/09,Email correspondence,Communication,1.0,
+Nguyen V.A,2025/06/10,Daily meeting,Meeting,1.0,Run meeting
+Nguyen V.A,2025/06/10,Client email rounding Q,Communication,1.5,Send to 鈴木さん
+Nguyen V.A,2025/06/10,Bug triage BUG-301/302,Management,1.0,
+Nguyen V.A,2025/06/10,Progress tracking,Management,2.0,Jira + WBS update
+Nguyen V.A,2025/06/10,Translation,Communication,2.0,Spec clarification
+Nguyen V.A,2025/06/10,Internal meeting,Meeting,0.5,Quick sync with Tran B
+Nguyen V.A,2025/06/11,Daily meeting,Meeting,1.0,Run meeting
+Nguyen V.A,2025/06/11,Follow up rounding Q,Communication,1.0,鈴木さん OOO
+Nguyen V.A,2025/06/11,Progress tracking,Management,2.0,
+Nguyen V.A,2025/06/11,Report writing,Documentation,2.0,Weekly prep
+Nguyen V.A,2025/06/11,Translation,Communication,2.0,
+Nguyen V.A,2025/06/12,Daily meeting,Meeting,1.0,Run meeting
+Nguyen V.A,2025/06/12,Client meeting,Meeting,1.5,Weekly sync with 鈴木さん
+Nguyen V.A,2025/06/12,Spec confirm relay,Communication,1.5,Rounding answer → team
+Nguyen V.A,2025/06/12,Progress tracking,Management,2.0,
+Nguyen V.A,2025/06/12,Bug triage BUG-305,Management,1.0,
+Nguyen V.A,2025/06/12,Translation,Communication,1.0,
+Nguyen V.A,2025/06/13,Daily meeting,Meeting,1.0,Run meeting
+Nguyen V.A,2025/06/13,Sprint review prep,Meeting,2.5,Slides + demo check
+Nguyen V.A,2025/06/13,Progress tracking,Management,1.5,
+Nguyen V.A,2025/06/13,Workload review,Management,1.0,Pham D concern
+Nguyen V.A,2025/06/13,Daily report writing,Documentation,1.0,
+Nguyen V.A,2025/06/13,Email correspondence,Communication,1.0,

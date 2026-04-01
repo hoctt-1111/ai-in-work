@@ -1,0 +1,20 @@
+Ticket,Type,Summary,Status,Assignee,Priority,Estimate_Hours,Spent_Hours,Sprint,Component
+INV-180,Story,棚卸一覧 API,Done,Tran T.B,Medium,16,14.5,Sprint 15,Backend
+INV-181,Story,棚卸一覧画面,Done,Le V.C,Medium,20,17.5,Sprint 15,Frontend
+INV-182,Story,棚卸登録 API,Done,Tran T.B,High,24,21.5,Sprint 15,Backend
+INV-183,Story,棚卸登録画面,In Progress,Le V.C,High,24,18.0,Sprint 15,Frontend
+INV-184,Story,棚卸結果出力 API (PDF),In Progress,Tran T.B,Medium,20,15.5,Sprint 15,Backend
+INV-185,Story,棚卸結果出力画面,To Do,Le V.C,Medium,16,0,Sprint 15,Frontend
+INV-186,Story,出荷指示 API,In Progress,Pham T.D,High,24,19.0,Sprint 15,Backend
+INV-187,Story,出荷指示画面,To Do,Le V.C,High,20,0,Sprint 16,Frontend
+INV-234,Bug,入庫管理 数量0バリデーション,Done,Pham T.D,Medium,8,7.5,Sprint 15,Backend
+INV-256,Task,DB Performance 在庫一覧 query,Done,Pham T.D,Critical,16,13.5,Sprint 15,Backend
+INV-267,Bug,入庫日 date format inconsistency,Open,Unassigned,Low,2,0,Sprint 15,Frontend
+BUG-301,Bug,出荷数量 negative value accepted,Open,Unassigned,Medium,4,0,Sprint 15,Backend
+BUG-302,Bug,CSV export encoding Shift-JIS/UTF-8,Open,Unassigned,High,8,0,Sprint 15,Backend
+BUG-305,Bug,出荷管理 CSV empty when filter 出荷先,In Progress,Tran T.B,Critical,6,3.5,Sprint 15,Backend
+INV-260,Task,Test case 出荷管理,Done,Hoang M.E,Medium,12,10.5,Sprint 15,QA
+INV-261,Task,Regression test 入庫管理,Done,Hoang M.E,Medium,8,7.0,Sprint 15,QA
+INV-262,Task,Test execution 棚卸一覧,Done,Hoang M.E,Medium,6,7.0,Sprint 15,QA
+INV-263,Task,Test case writing 棚卸登録,In Progress,Hoang M.E,Medium,8,3.0,Sprint 15,QA
+INV-270,Task,Sprint Review preparation,In Progress,Nguyen V.A,Medium,4,2.5,Sprint 15,Management
