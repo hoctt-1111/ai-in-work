@@ -126,6 +126,15 @@
       else if (t === '🟡 Cần xử lý') td.parentElement.classList.add('level-caution');
       else if (t === '🔴 Cấm') td.parentElement.classList.add('level-danger');
     });
+    // Agenda links: navigate to section on click
+    sectionContent.querySelectorAll('a.agenda-link[data-goto]').forEach(function (a) {
+      a.style.cursor = 'pointer';
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        goTo(parseInt(a.dataset.goto, 10));
+      });
+    });
+
     // Style demo-links blockquotes and route links through viewer.html
     sectionContent.querySelectorAll('blockquote').forEach(function (bq) {
       var links = bq.querySelectorAll('a[href*="demo-data/"]');

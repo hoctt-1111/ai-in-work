@@ -675,6 +675,17 @@ body {
     border-color: var(--color-primary);
 }
 
+/* Agenda navigation links */
+a.agenda-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--color-primary);
+    transition: border-bottom 0.2s;
+}
+a.agenda-link:hover {
+    border-bottom: 2px solid var(--color-primary);
+}
+
 .section-content blockquote p {
     color: var(--text-primary);
     margin-bottom: 0;
