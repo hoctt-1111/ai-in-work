@@ -53,7 +53,6 @@
     var sec = SECTIONS[secIdx];
     if (!sec) return;
 
-    // Build section header + rendered markdown
     var headerHTML =
       '<div class="section-header">' +
         '<span class="section-icon">' + sec.icon + '</span>' +
@@ -112,7 +111,7 @@
       pre.appendChild(btn);
     });
 
-    // Style stat items: ✅ → good, ❌ → bad
+    // Style stat items
     sectionContent.querySelectorAll('li').forEach(function (li) {
       var text = li.textContent;
       if (text.startsWith('✅')) li.classList.add('stat-good');
@@ -127,7 +126,7 @@
       else if (t === '🔴 Cấm') td.parentElement.classList.add('level-danger');
     });
 
-    // Agenda links: navigate to section on click
+    // Agenda links
     sectionContent.querySelectorAll('a.agenda-link[data-goto]').forEach(function (a) {
       a.style.cursor = 'pointer';
       a.addEventListener('click', function (e) {
@@ -137,7 +136,7 @@
       });
     });
 
-    // Style demo-links blockquotes and route links through viewer.html
+    // Demo-links: route through viewer.html
     sectionContent.querySelectorAll('blockquote').forEach(function (bq) {
       var links = bq.querySelectorAll('a[href*="demo-data/"]');
       if (links.length > 0) {
@@ -154,22 +153,18 @@
 
   // --- Update UI state ---
   function updateUI() {
-    // Active nav item
     navList.querySelectorAll('.nav-item').forEach(function (item) {
       var link = item.querySelector('.nav-link');
       if (link) link.classList.toggle('active', +item.dataset.index === currentSection);
     });
 
-    // Progress bar — section-level
     var pct = ((currentSection + 1) / totalSections) * 100;
     progressBar.style.width = pct + '%';
     progressText.textContent = (currentSection + 1) + ' / ' + totalSections;
 
-    // Prev / Next buttons
     btnPrev.disabled = currentSection === 0;
     btnNext.disabled = currentSection === totalSections - 1;
 
-    // Labels: show shortTitle of adjacent section
     var prevSec = currentSection > 0 ? SECTIONS[currentSection - 1] : null;
     var nextSec = currentSection < totalSections - 1 ? SECTIONS[currentSection + 1] : null;
 
@@ -189,7 +184,6 @@
   btnPrev.addEventListener('click', function () { goTo(currentSection - 1); });
   btnNext.addEventListener('click', function () { goTo(currentSection + 1); });
 
-  // Keyboard shortcuts
   document.addEventListener('keydown', function (e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentSection - 1); }
@@ -210,7 +204,6 @@
   themeToggle.addEventListener('click', toggleTheme);
   themeToggleMobile.addEventListener('click', toggleTheme);
 
-  // Restore saved theme
   var savedTheme = localStorage.getItem('theme');
   if (savedTheme) setTheme(savedTheme);
 
