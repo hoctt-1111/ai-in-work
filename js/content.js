@@ -58,6 +58,11 @@ const SECTIONS = [
 
 ---
 
+<div class="team-photo">
+  <img src="images/brse-comtor-team.jpg" alt="BrSE/Comtor Team">
+  <p class="team-caption">🎓 Team BrSE・Comtor — Sharing & Leveling up cùng nhau!</p>
+</div>
+
 ### Cách sử dụng website này
 - Dùng **sidebar bên trái** (hoặc menu ☰ trên mobile) để chuyển giữa các phần
 - Phím tắt: **← →** để điều hướng
@@ -1311,6 +1316,11 @@ Confirm spec bằng AI, risk analysis, spec comparison, workflow tự động.
 4. **Framework CRAFT reference card**
 
 ---
+
+<div class="team-photo">
+  <img src="images/brse-comtor-team.jpg" alt="BrSE/Comtor Team">
+  <p class="team-caption">🚀 Cùng nhau level up — AI là công cụ, con người là giá trị!</p>
+</div>
 
 ## Call-to-action
 
