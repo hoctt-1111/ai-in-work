@@ -87,48 +87,107 @@ const SECTIONS = [
 >
 > Mời **2 bạn** chia sẻ nhanh: **"Lần fail đáng nhớ nhất"**
 > (VD: AI dịch "仕様書" thành "tấm vé đặc biệt", AI viết email kính ngữ sai cấp...)
+  markdown: `
+## Bối cảnh: Vai trò BrSE/Comtor & AI là "must-have"
 
-*💡 Những câu chuyện success và fail vừa rồi — hôm nay mình sẽ hệ thống hóa lại: thành công thì nhân rộng, fail thì tránh.*
+<div style="text-align:center; margin:18px 0;">
+  <!-- Inline SVG: Customer ↔ BrSE/Comtor ↔ Dev Team + 3 tasks -->
+  <svg width="820" height="240" viewBox="0 0 820 240" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Offshore workflow diagram">
+    <defs>
+      <style type="text/css"><![CDATA[
+        .box { fill: #fff; stroke: #d1d5db; stroke-width:1.5; rx:8; }
+        .title { font: 600 14px/1.2 'Inter', sans-serif; fill: #0f172a; }
+        .sub { font: 400 12px/1.2 'Inter', sans-serif; fill: #374151; }
+        .arrow { stroke:#3b82f6; stroke-width:2; fill:none; marker-end:url(#arrow); }
+        .task { fill:#f8fafc; stroke:#c7d2fe; stroke-width:1; rx:6; }
+      ]]></style>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6" />
+      </marker>
+    </defs>
+
+    <!-- Top row: Customer - BrSE - Dev -->
+    <g transform="translate(40,16)">
+      <rect class="box" x="0" y="0" width="180" height="56" />
+      <text class="title" x="90" y="22" text-anchor="middle">Khách hàng (JP)</text>
+      <text class="sub" x="90" y="40" text-anchor="middle">Yêu cầu, meeting, feedback</text>
+
+      <rect class="box" x="220" y="0" width="240" height="56" />
+      <text class="title" x="340" y="22" text-anchor="middle">BrSE / Comtor</text>
+      <text class="sub" x="340" y="40" text-anchor="middle">Bridge / Translate / QA / PM</text>
+
+      <rect class="box" x="520" y="0" width="180" height="56" />
+      <text class="title" x="610" y="22" text-anchor="middle">Dev Team (VN)</text>
+      <text class="sub" x="610" y="40" text-anchor="middle">Implementation</text>
+
+      <!-- Arrows -->
+      <path class="arrow" d="M200 28 L218 28" />
+      <path class="arrow" d="M460 28 L520 28" />
+      <path class="arrow" d="M520 28 L460 28" />
+      <path class="arrow" d="M218 46 L200 46" />
+
+      <!-- Vertical arrow from BrSE down to tasks -->
+      <path class="arrow" d="M340 56 L340 90" />
+    </g>
+
+    <!-- Tasks under BrSE -->
+    <g transform="translate(40,110)">
+      <rect class="task" x="0" y="0" width="240" height="90" />
+      <text class="title" x="20" y="20">1) Giao tiếp với khách hàng</text>
+      <text class="sub" x="20" y="38">Email keigo, meeting, confirm, negotiation</text>
+
+      <rect class="task" x="280" y="0" width="240" height="90" />
+      <text class="title" x="300" y="20">2) Yêu cầu & Specification</text>
+      <text class="sub" x="300" y="38">Đọc JP, tóm tắt, confirm-questions, format</text>
+
+      <rect class="task" x="560" y="0" width="240" height="90" />
+      <text class="title" x="580" y="20">3) Quản lý team & tiến độ</text>
+      <text class="sub" x="580" y="38">Onboarding, báo cáo, estimate, action-tracking</text>
+    </g>
+  </svg>
+</div>
 
 ---
 
-## Dữ liệu Survey
+### Ba đầu việc lớn của BrSE / Comtor
 
-### Tin tốt — AI đã được adopt rộng rãi:
-- ✅ **11/12** người dùng AI thường xuyên hàng ngày
-- ✅ **9/12** cảm nhận năng suất tăng **30–50%**
-- ✅ Ứng dụng đa dạng: email, dịch thuật, tóm tắt spec, viết tài liệu
+1. **Giao tiếp với khách hàng** — email keigo, meeting minutes, confirm requirement, negotiate scope.  
+2. **Làm việc với yêu cầu & Specification** — đọc tài liệu JP, tóm tắt, tạo confirmation questions, chuẩn hoá format & glossary.  
+3. **Quản lý team & tiến độ** — onboarding, phân task, timesheet, báo cáo tuần, follow-up action items, estimation.
 
-### Nhưng — vẫn tồn tại gap lớn:
-- ❌ **10/12** lo ngại về bảo mật dữ liệu
-- ❌ **7/12** bị hạn chế bởi quy định dự án
-- ❌ **6/12** mất thời gian chỉnh sửa output AI
-- ❌ **5/12** gặp kết quả AI không chính xác
-- ❌ **4/12** không biết prompt thế nào cho hiệu quả
-- ❌ **4/12** chưa dùng AI cho quản lý dự án
+---
 
-### Câu hỏi mở:
-> *"Chúng ta đã dùng AI nhiều — nhưng đã dùng ĐÚNG CÁCH chưa? Hôm nay chúng ta sẽ đi qua từng khó khăn thực tế và cách AI giải quyết."*
+### Các nút thắt thường gặp
+
+**Giao tiếp với khách hàng**
+- Keigo / tone không phù hợp → mất uy tín.
+- Thiếu context → yêu cầu bị hiểu sai.
+- Phản hồi chậm → blocker cho dev.
+
+**Yêu cầu & Spec**
+- Tài liệu dài/vô cấu trúc → tốn thời gian đọc.
+- Thiếu confirmation questions → spec mơ hồ.
+- Không thống nhất format/glossary → mismatch requirements.
+
+**Quản lý team**
+- Báo cáo thủ công, tốn thời gian.
+- Action item rơi giữa meeting → không thực thi.
+- Estimation thiếu chính xác → plan sai.
+
+---
+
+### Mở bài cho các case study
+
+Hôm nay chúng ta sẽ lần lượt giải quyết các nút thắt trên bằng các case study thực tế:
+- **Case Study 1** — Giao tiếp: email keigo, roleplay, glossary.
+- **Case Study 2** — Spec: tóm tắt, confirm-questions, format templates.
+- **Case Study 3** — Quản lý: onboarding kit, weekly report, action tracking.
+
+Mỗi case study sẽ:
+- Chỉ ra nút thắt cụ thể,
+- Demo cách dùng AI để giải (prompt + workflow),
+- Cho template / checklist để áp dụng ngay.
 `
-},
-{
-  id: 2,
-  title: 'Bối cảnh: Vai trò BrSE/Comtor & AI là "must-have"',
-  shortTitle: 'Bối cảnh',
-  time: '10 phút',
-  icon: '🌏',
-  markdown: `
-## Chuỗi công việc đặc thù trong mô hình offshore
-
-\`\`\`
-Khách hàng (JP) ←→ BrSE/Comtor ←→ Dev Team (VN)
-       ↑                  ↑                ↑
-  Tiếng Nhật         Cầu nối           Tiếng Việt
-  Keigo/敬語      Dịch + Hiểu + Truyền đạt   Technical
-  Spec gốc        QA, Confirm, Report    Implementation
-\`\`\`
-
-## 4 Nút thắt trong workflow hàng ngày
 
 ### 🗣️ Nút thắt 1: Rào cản ngôn ngữ
 - Keigo (敬語) — sai level lịch sự = mất trust
