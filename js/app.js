@@ -1,25 +1,49 @@
-// app.js — Main application logic
+// app.js — Main application logic (slide-based navigation)
 (function () {
   'use strict';
 
+  // --- Build flat slides array from SECTIONS ---
+  // Each section's markdown is split by '\n---\n' into individual slides
+  var SLIDES = [];
+  var sectionSlideMap = []; // sectionSlideMap[sectionId] = { start, count }
+
+  SECTIONS.forEach(function (sec) {
+    var parts = sec.markdown.split(/\n---\n/);
+    var startIdx = SLIDES.length;
+    parts.forEach(function (part, i) {
+      SLIDES.push({
+        sectionId: sec.id,
+        sectionTitle: sec.title,
+        shortTitle: sec.shortTitle,
+        time: sec.time,
+        icon: sec.icon,
+        slideIndex: i,
+        totalSlides: parts.length,
+        markdown: part
+      });
+    });
+    sectionSlideMap[sec.id] = { start: startIdx, count: parts.length };
+  });
+
   // --- State ---
-  let currentSection = 0;
-  const totalSections = SECTIONS.length;
+  var currentSlide = 0;
+  var totalSlides = SLIDES.length;
+  var totalSections = SECTIONS.length;
 
   // --- DOM refs ---
-  const navList = document.getElementById('nav-list');
-  const sectionContent = document.getElementById('section-content');
-  const progressBar = document.getElementById('progress-bar');
-  const progressText = document.getElementById('progress-text');
-  const btnPrev = document.getElementById('btn-prev');
-  const btnNext = document.getElementById('btn-next');
-  const prevLabel = document.getElementById('prev-label');
-  const nextLabel = document.getElementById('next-label');
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-  const menuToggle = document.getElementById('menu-toggle');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
+  var navList = document.getElementById('nav-list');
+  var sectionContent = document.getElementById('section-content');
+  var progressBar = document.getElementById('progress-bar');
+  var progressText = document.getElementById('progress-text');
+  var btnPrev = document.getElementById('btn-prev');
+  var btnNext = document.getElementById('btn-next');
+  var prevLabel = document.getElementById('prev-label');
+  var nextLabel = document.getElementById('next-label');
+  var themeToggle = document.getElementById('theme-toggle');
+  var themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  var menuToggle = document.getElementById('menu-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('overlay');
 
   // --- Markdown renderer setup ---
   marked.setOptions({
@@ -31,9 +55,10 @@
   function buildNav() {
     navList.innerHTML = '';
     SECTIONS.forEach(function (sec) {
-      const li = document.createElement('li');
+      var li = document.createElement('li');
       li.className = 'nav-item';
       li.dataset.index = sec.id;
+      var slideCount = sectionSlideMap[sec.id].count;
       li.innerHTML =
         '<div class="nav-link">' +
           '<span class="nav-number">' + sec.icon + '</span>' +
@@ -41,36 +66,68 @@
           '<span class="nav-time">' + sec.time + '</span>' +
         '</div>';
       li.addEventListener('click', function () {
-        goTo(sec.id);
+        goToSlide(sectionSlideMap[sec.id].start);
         closeMobileMenu();
       });
       navList.appendChild(li);
     });
   }
 
-  // --- Render a section ---
-  function renderSection(index) {
-    const sec = SECTIONS[index];
-    if (!sec) return;
+  // --- Render a slide ---
+  function renderSlide(slideIdx) {
+    var slide = SLIDES[slideIdx];
+    if (!slide) return;
+
+    var slideIndicator = '';
+    var slideDotsHTML = '';
+    if (slide.totalSlides > 1) {
+      slideIndicator = '<span class="slide-indicator">' + (slide.slideIndex + 1) + ' / ' + slide.totalSlides + '</span>';
+      // Build dots + progress bar
+      var dots = '';
+      for (var d = 0; d < slide.totalSlides; d++) {
+        var cls = 'slide-dot';
+        if (d === slide.slideIndex) cls += ' active';
+        else if (d < slide.slideIndex) cls += ' visited';
+        dots += '<span class="' + cls + '" data-slide-offset="' + d + '"></span>';
+      }
+      var slidePct = ((slide.slideIndex + 1) / slide.totalSlides) * 100;
+      slideDotsHTML =
+        '<div class="slide-progress">' +
+          '<div class="slide-dots">' + dots + '</div>' +
+          '<div class="slide-progress-bar"><div class="slide-progress-fill" style="width:' + slidePct + '%"></div></div>' +
+        '</div>';
+    }
 
     // Build section header + rendered markdown
-    const headerHTML =
+    var headerHTML =
       '<div class="section-header">' +
-        '<span class="section-icon">' + sec.icon + '</span>' +
+        '<span class="section-icon">' + slide.icon + '</span>' +
         '<div>' +
-          '<h1 class="section-title">' + sec.title + '</h1>' +
+          '<h1 class="section-title">' + slide.sectionTitle + '</h1>' +
           '<div class="section-meta">' +
-            '<span class="section-number">#' + sec.id + '</span>' +
-            '<span class="section-time">⏱ ' + sec.time + '</span>' +
+            '<span class="section-number">#' + slide.sectionId + '</span>' +
+            '<span class="section-time">⏱ ' + slide.time + '</span>' +
+            slideIndicator +
           '</div>' +
         '</div>' +
-      '</div>';
+      '</div>' +
+      slideDotsHTML;
 
-    const bodyHTML = marked.parse(sec.markdown);
+    var bodyHTML = marked.parse(slide.markdown);
+
+    // Store sectionId start for dot click navigation
+    var sectionStart = sectionSlideMap[slide.sectionId].start;
 
     sectionContent.classList.add('fade-out');
     setTimeout(function () {
       sectionContent.innerHTML = headerHTML + '<div class="rendered-md">' + bodyHTML + '</div>';
+      // Dot click navigation
+      sectionContent.querySelectorAll('.slide-dot[data-slide-offset]').forEach(function (dot) {
+        dot.style.cursor = 'pointer';
+        dot.addEventListener('click', function () {
+          goToSlide(sectionStart + parseInt(dot.dataset.slideOffset, 10));
+        });
+      });
       postProcess();
       sectionContent.classList.remove('fade-out');
       sectionContent.scrollTop = 0;
@@ -83,7 +140,7 @@
     // Wrap tables for horizontal scroll
     sectionContent.querySelectorAll('table').forEach(function (table) {
       if (!table.parentElement.classList.contains('table-wrapper')) {
-        const wrapper = document.createElement('div');
+        var wrapper = document.createElement('div');
         wrapper.className = 'table-wrapper';
         table.parentNode.insertBefore(wrapper, table);
         wrapper.appendChild(table);
@@ -92,9 +149,9 @@
 
     // Add copy button to code blocks
     sectionContent.querySelectorAll('pre code').forEach(function (codeEl) {
-      const pre = codeEl.parentElement;
+      var pre = codeEl.parentElement;
       if (pre.querySelector('.code-copy-btn')) return;
-      const btn = document.createElement('button');
+      var btn = document.createElement('button');
       btn.className = 'code-copy-btn';
       btn.textContent = 'Copy';
       btn.setAttribute('aria-label', 'Copy code');
@@ -114,24 +171,26 @@
 
     // Style stat items: ✅ → good, ❌ → bad
     sectionContent.querySelectorAll('li').forEach(function (li) {
-      const text = li.textContent;
+      var text = li.textContent;
       if (text.startsWith('✅')) li.classList.add('stat-good');
       else if (text.startsWith('❌')) li.classList.add('stat-bad');
     });
 
     // Add level classes to security table rows
     sectionContent.querySelectorAll('td').forEach(function (td) {
-      const t = td.textContent.trim();
+      var t = td.textContent.trim();
       if (t === '🟢 An toàn') td.parentElement.classList.add('level-safe');
       else if (t === '🟡 Cần xử lý') td.parentElement.classList.add('level-caution');
       else if (t === '🔴 Cấm') td.parentElement.classList.add('level-danger');
     });
+
     // Agenda links: navigate to section on click
     sectionContent.querySelectorAll('a.agenda-link[data-goto]').forEach(function (a) {
       a.style.cursor = 'pointer';
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        goTo(parseInt(a.dataset.goto, 10));
+        var sectionId = parseInt(a.dataset.goto, 10);
+        goToSlide(sectionSlideMap[sectionId].start);
       });
     });
 
@@ -147,45 +206,75 @@
           a.setAttribute('rel', 'noopener');
         });
       }
-    });  }
+    });
+  }
+
+  // --- Get current section ID from slide index ---
+  function getCurrentSectionId() {
+    return SLIDES[currentSlide] ? SLIDES[currentSlide].sectionId : 0;
+  }
 
   // --- Update UI state ---
   function updateUI() {
-    // Active nav item
+    var secId = getCurrentSectionId();
+
+    // Active nav item — highlight current section
     navList.querySelectorAll('.nav-item').forEach(function (item) {
       var link = item.querySelector('.nav-link');
-      if (link) link.classList.toggle('active', +item.dataset.index === currentSection);
+      if (link) link.classList.toggle('active', +item.dataset.index === secId);
     });
 
-    // Progress bar
-    const pct = ((currentSection + 1) / totalSections) * 100;
+    // Progress bar — section-level
+    var pct = ((secId + 1) / totalSections) * 100;
     progressBar.style.width = pct + '%';
-    progressText.textContent = (currentSection + 1) + ' / ' + totalSections;
+    progressText.textContent = (secId + 1) + ' / ' + totalSections;
 
     // Prev / Next buttons
-    btnPrev.disabled = currentSection === 0;
-    btnNext.disabled = currentSection === totalSections - 1;
-    prevLabel.textContent = currentSection > 0 ? SECTIONS[currentSection - 1].shortTitle : '';
-    nextLabel.textContent = currentSection < totalSections - 1 ? SECTIONS[currentSection + 1].shortTitle : '';
+    btnPrev.disabled = currentSlide === 0;
+    btnNext.disabled = currentSlide === totalSlides - 1;
+
+    // Labels: show section shortTitle when crossing section boundary, else empty
+    var prevSlide = currentSlide > 0 ? SLIDES[currentSlide - 1] : null;
+    var nextSlide = currentSlide < totalSlides - 1 ? SLIDES[currentSlide + 1] : null;
+    var currentSec = SLIDES[currentSlide];
+
+    if (prevSlide && prevSlide.sectionId !== currentSec.sectionId) {
+      prevLabel.textContent = prevSlide.shortTitle;
+    } else {
+      prevLabel.textContent = currentSlide > 0 ? '‹' : '';
+    }
+
+    if (nextSlide && nextSlide.sectionId !== currentSec.sectionId) {
+      nextLabel.textContent = nextSlide.shortTitle;
+    } else {
+      nextLabel.textContent = currentSlide < totalSlides - 1 ? '›' : '';
+    }
   }
 
   // --- Navigation ---
-  function goTo(index) {
-    if (index < 0 || index >= totalSections) return;
-    currentSection = index;
-    renderSection(currentSection);
+  function goToSlide(index) {
+    if (index < 0 || index >= totalSlides) return;
+    currentSlide = index;
+    renderSlide(currentSlide);
     updateUI();
     saveState();
   }
 
-  btnPrev.addEventListener('click', function () { goTo(currentSection - 1); });
-  btnNext.addEventListener('click', function () { goTo(currentSection + 1); });
+  // Legacy goTo by section ID — jumps to first slide of that section
+  function goTo(sectionId) {
+    if (sectionSlideMap[sectionId]) {
+      goToSlide(sectionSlideMap[sectionId].start);
+    }
+  }
+
+  btnPrev.addEventListener('click', function () { goToSlide(currentSlide - 1); });
+  btnNext.addEventListener('click', function () { goToSlide(currentSlide + 1); });
 
   // Keyboard shortcuts
   document.addEventListener('keydown', function (e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentSection - 1); }
-    else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentSection + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(currentSlide - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); goToSlide(currentSlide + 1); }
   });
 
   // --- Theme toggle ---
@@ -195,7 +284,7 @@
   }
 
   function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
+    var current = document.documentElement.getAttribute('data-theme');
     setTheme(current === 'dark' ? 'light' : 'dark');
   }
 
@@ -203,7 +292,7 @@
   themeToggleMobile.addEventListener('click', toggleTheme);
 
   // Restore saved theme
-  const savedTheme = localStorage.getItem('theme');
+  var savedTheme = localStorage.getItem('theme');
   if (savedTheme) setTheme(savedTheme);
 
   // --- Mobile menu ---
@@ -214,7 +303,7 @@
   }
 
   menuToggle.addEventListener('click', function () {
-    const isOpen = sidebar.classList.contains('open');
+    var isOpen = sidebar.classList.contains('open');
     sidebar.classList.toggle('open', !isOpen);
     overlay.classList.toggle('show', !isOpen);
     document.body.classList.toggle('menu-open', !isOpen);
@@ -222,22 +311,22 @@
 
   overlay.addEventListener('click', closeMobileMenu);
 
-  // --- Persist current section ---
+  // --- Persist current slide ---
   function saveState() {
-    sessionStorage.setItem('currentSection', currentSection);
+    sessionStorage.setItem('currentSlide', currentSlide);
   }
 
   function restoreState() {
-    const saved = sessionStorage.getItem('currentSection');
+    var saved = sessionStorage.getItem('currentSlide');
     if (saved !== null) {
-      const idx = parseInt(saved, 10);
-      if (idx >= 0 && idx < totalSections) currentSection = idx;
+      var idx = parseInt(saved, 10);
+      if (idx >= 0 && idx < totalSlides) currentSlide = idx;
     }
   }
 
   // --- Init ---
   restoreState();
   buildNav();
-  renderSection(currentSection);
+  renderSlide(currentSlide);
   updateUI();
 })();

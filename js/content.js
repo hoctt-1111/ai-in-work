@@ -19,9 +19,17 @@ const SECTIONS = [
 
 > Không chỉ **"biết dùng AI"** — mà chuyển sang **"dùng AI đúng cách, an toàn, và hiệu quả cao"** trong bối cảnh outsourcing Nhật Bản.
 
+**Mục tiêu cụ thể:**
+1. 🔄 **Sharing nội bộ** — Chia sẻ & học hỏi cách dùng AI khác nhau trong team
+2. 🛡️ **Dùng đúng cách** — Hiểu ranh giới bảo mật, tránh rủi ro compliance
+3. ⚡ **Nâng cao hiệu quả** — Prompt tốt hơn, workflow tối ưu hơn, output chính xác hơn
+4. 🤝 **Chuẩn hóa** — Xây dựng "cách dùng AI chung" cho team BrSE/Comtor
+
 - **Đối tượng:** BrSE / Comtor đang làm việc trong mô hình offshore với khách hàng Nhật Bản
-- **Nguồn dữ liệu:** Kết quả khảo sát 12 BrSE/Comtor thực tế
-- **Tổng thời lượng:** ~112 phút
+- **Nguồn dữ liệu:**
+  - Kết quả khảo sát BrSE/Comtor thực tế
+  - Insight về quy trình, đặc thù công việc BrSE/Comtor trong phát triển phần mềm với KH Nhật Bản
+- **Tổng thời lượng:** ~115 phút
 
 ### Survey snapshot
 
@@ -38,7 +46,7 @@ const SECTIONS = [
 
 | # | Nội dung | Thời lượng |
 | --- | --- | --- |
-| 0 | <a class="agenda-link" data-goto="1">📊 Opening — Thực trạng từ Survey</a> | 5 phút |
+| 0 | <a class="agenda-link" data-goto="1">📊 Opening & Warmup — Thực trạng từ Survey</a> | 8 phút |
 | 1 | <a class="agenda-link" data-goto="2">🌏 Bối cảnh: Vai trò BrSE/Comtor & AI là "must-have"</a> | 10 phút |
 | 2 | <a class="agenda-link" data-goto="3">🔒 Nguyên tắc Vàng: Bảo mật & Compliance</a> | 10 phút |
 | 3 | <a class="agenda-link" data-goto="4">✉️ Case Study 1 — Giao tiếp khách hàng bằng tiếng Nhật</a> | 20 phút |
@@ -59,11 +67,26 @@ const SECTIONS = [
 },
 {
   id: 1,
-  title: 'Opening — Thực trạng & Khó khăn từ Survey',
+  title: 'Opening & Warmup — Thực trạng từ Survey',
   shortTitle: 'Opening',
-  time: '5 phút',
+  time: '8 phút',
   icon: '📊',
   markdown: `
+## ☕ Warmup — Bạn dùng AI thế nào?
+
+### 🙋 Giơ tay poll
+> **"Ai đã dùng AI sáng nay?"** → đếm nhanh
+
+### 💬 Share out
+> Mời **2 bạn** chia sẻ nhanh: **"Lần dùng AI thành công nhất"**
+>
+> Mời **2 bạn** chia sẻ nhanh: **"Lần fail đáng nhớ nhất"**
+> (VD: AI dịch "仕様書" thành "tấm vé đặc biệt", AI viết email kính ngữ sai cấp...)
+
+*💡 Những câu chuyện success và fail vừa rồi — hôm nay mình sẽ hệ thống hóa lại: thành công thì nhân rộng, fail thì tránh.*
+
+---
+
 ## Dữ liệu Survey
 
 ### Tin tốt — AI đã được adopt rộng rãi:
@@ -79,7 +102,7 @@ const SECTIONS = [
 - ❌ **4/12** không biết prompt thế nào cho hiệu quả
 - ❌ **4/12** chưa dùng AI cho quản lý dự án
 
-### Câu hỏi mở cho audience:
+### Câu hỏi mở:
 > *"Chúng ta đã dùng AI nhiều — nhưng đã dùng ĐÚNG CÁCH chưa? Hôm nay chúng ta sẽ đi qua từng khó khăn thực tế và cách AI giải quyết."*
 `
 },
