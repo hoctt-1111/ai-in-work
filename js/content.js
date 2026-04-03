@@ -121,7 +121,6 @@ const SECTIONS = [
   markdown: `
 > 🙋 **Câu hỏi mở:** Trong công việc BrSE/Comtor hàng ngày, bạn đang dành nhiều thời gian nhất cho việc gì? Và bạn đang xử lý nó như thế nào?
 
----
 
 ## Chuỗi công việc đặc thù trong mô hình Offshore
 
@@ -135,6 +134,11 @@ BrSE / Comtor  ←→  Dev Team (VN)
    │
   (Hỗ trợ chuyển đổi yêu cầu, đảm bảo chất lượng, quản lý tiến độ)
 \`\`\`
+## Chuỗi công việc đặc thù trong mô hình Offshore
+
+<div class="diagram" style="text-align:center; margin:18px 0;">
+  <img src="images/brse-work.png" alt="BrSE work flow" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.08);" />
+</div>
 
 ---
 
