@@ -79,7 +79,6 @@
                     document.getElementById('content').textContent = 'File not found: ' + file;
                 });
         }
-
         document.getElementById('copy-all').addEventListener('click', function() {
             var btn = this;
             navigator.clipboard.writeText(rawText).then(function() {

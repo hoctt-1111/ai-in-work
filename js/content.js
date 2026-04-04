@@ -324,6 +324,135 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
 `
 },
 {
+  id: 4,
+  title: 'Kỹ thuật Prompt — Framework CRAFT',
+  shortTitle: 'Prompt CRAFT',
+  time: '10 phút',
+  icon: '🎯',
+  markdown: `
+> 🙋 **Câu hỏi mở:** Khi AI cho output không đúng ý, bạn thường làm gì tiếp theo? Bạn có cách nào để làm cho prompt hiệu quả hơn không?
+
+---
+
+## Dữ liệu Survey
+- **4/12** thừa nhận "không biết prompt thế nào"
+- **6/12** mất thời gian chỉnh sửa output AI
+- **5/12** gặp kết quả AI không chính xác
+
+## Khó khăn thực tế
+> "Không biết prompt sao cho AI hiểu, kết quả sai lè, chỉnh tới chỉnh lui mất thời gian"
+
+---
+
+## Framework CRAFT cho BrSE/Comtor
+
+| Yếu tố | Ý nghĩa | Ví dụ thực tế |
+| --- | --- | --- |
+| **C** - Context | Bối cảnh dự án | "Dự án maintenance hệ thống EC, khách là 部長 level" |
+| **R** - Role | Vai trò AI đóng | "Đóng vai BrSE senior 10 năm kinh nghiệm" |
+| **A** - Action | Hành động cần làm | "Viết email xin lỗi về delay 3 ngày" |
+| **F** - Format | Định dạng output | "Format: 件名 / 本文, tách rõ 原因 và 対応策" |
+| **T** - Tone | Giọng điệu | "Lịch sự nhưng thẳng thắn, thể hiện trách nhiệm" |
+
+---
+
+## Demo: Prompt kém vs Prompt tốt
+
+### ❌ Prompt kém:
+\`\`\`
+Dịch cái này sang tiếng Nhật
+\`\`\`
+**Kết quả:** Dịch literal, sai tone, mất thuật ngữ chuyên ngành
+
+### ✅ Prompt CRAFT:
+\`\`\`
+[C] Dự án EC system. Tài liệu là mô tả chức năng thanh toán.
+[R] Technical writer chuyên tài liệu JP.
+[A] Dịch mô tả chức năng sau sang tiếng Nhật.
+[F] Giữ heading structure. Glossary:
+    - Thanh toán → 決済
+    - Giỏ hàng → カート
+    - Xác nhận → 確認
+[T] 基本設計書 level, đối tượng đọc là engineer khách.
+---
+[NỘI DUNG CẦN DỊCH]
+\`\`\`
+**Kết quả:** Chính xác, đúng format, đúng tone, thuật ngữ nhất quán
+
+---
+
+## Thư viện Prompt Template
+
+### Template 1: Email tiếng Nhật
+\`\`\`
+[C] Dự án [LOẠI], email gửi cho [CHỨC DANH] phía khách.
+[R] BrSE senior có kinh nghiệm giao tiếp khách JP.
+[A] Viết email [MỤC ĐÍCH]: [NỘI DUNG CHÍNH].
+[F] 件名 / 本文 (背景・原因・対応策・お願い)
+[T] ビジネス敬語, mức lịch sự phù hợp [CHỨC DANH].
+\`\`\`
+
+### Template 2: Tóm tắt Spec
+\`\`\`
+[C] Spec [LOẠI] cho module [TÊN MODULE].
+[R] BrSE reviewer cần brief cho team dev.
+[A] Tóm tắt theo: 概要 / 機能一覧 / 注意点 / 確認事項.
+[F] Tiếng Việt, bullet points, tối đa 2 trang.
+[T] Kỹ thuật, rõ ràng, actionable.
+\`\`\`
+
+### Template 3: Câu hỏi Confirm
+\`\`\`
+[C] Spec chức năng [TÊN], phase [PHASE].
+[R] QA reviewer 10 năm kinh nghiệm dự án JP.
+[A] Phát hiện điểm mơ hồ, sinh câu hỏi confirm.
+[F] Bảng: No. / 項目 / 不明点 / 確認したい内容
+[T] Chuyên nghiệp, trọng tâm, có priority.
+\`\`\`
+
+### Template 4: Weekly Report
+\`\`\`
+[C] Dự án [LOẠI], sprint [SỐ], team [SỐ NGƯỜI].
+[R] PM báo cáo cho khách.
+[A] Tổng hợp thành Weekly Report.
+[F] 今週の進捗 / 課題・リスク / 来週の予定
+[T] ビジネス敬語, ngắn gọn.
+---
+[RAW DATA]
+\`\`\`
+
+---
+
+### Template 5: Confirm Action Items từ Meeting
+\`\`\`
+[C] Meeting [TÊN], ngày [NGÀY], attendees: [DANH SÁCH].
+[R] Secretary ghi biên bản chuyên nghiệp dự án JP.
+[A] Trích xuất tất cả action items từ nội dung meeting.
+[F] Bảng: No. / Action Item / Assignee / Due Date / Status
+[T] Ngắn gọn, rõ owner và deadline, tiếng Việt.
+---
+[NỘI DUNG MEETING]
+\`\`\`
+
+---
+
+## Công cụ check & cải thiện prompt
+
+| Tool | Mô tả | Link |
+| --- | --- | --- |
+| Learn Prompting | Hướng dẫn toàn diện, miễn phí | learnprompting.org |
+| OpenAI Prompt Guide | Best practices chính thức từ OpenAI | platform.openai.com/docs/guides/prompt-engineering |
+| Anthropic Prompt Library | Thư viện prompt mẫu của Claude | docs.anthropic.com/en/prompt-library |
+| PromptPerfect | Auto-optimize prompt của bạn | promptperfect.jina.ai |
+| FlowGPT | Cộng đồng chia sẻ prompt | flowgpt.com |
+
+---
+
+## Takeaway
+> *"CRAFT + Template = combo giải quyết gốc rễ 'không biết prompt' và 'output sai'. Prompt tốt hơn = Output tốt hơn = Ít chỉnh sửa hơn."*
+`
+},
+{
   id: 5,
   title: 'Case Study 1 — Giao tiếp khách hàng bằng tiếng Nhật',
   shortTitle: 'Giao tiếp JP',
@@ -1337,135 +1466,6 @@ Tôi cần 1 máy tính online hỗ trợ:
 2. 🤖 AI sinh bản đầu tiên
 3. 🔄 Iterate: review → feedback → AI sửa
 4. 🚀 Deploy / Sử dụng ngay
-`
-},
-{
-  id: 4,
-  title: 'Kỹ thuật Prompt — Framework CRAFT',
-  shortTitle: 'Prompt CRAFT',
-  time: '10 phút',
-  icon: '🎯',
-  markdown: `
-> 🙋 **Câu hỏi mở:** Khi AI cho output không đúng ý, bạn thường làm gì tiếp theo? Bạn có cách nào để làm cho prompt hiệu quả hơn không?
-
----
-
-## Dữ liệu Survey
-- **4/12** thừa nhận "không biết prompt thế nào"
-- **6/12** mất thời gian chỉnh sửa output AI
-- **5/12** gặp kết quả AI không chính xác
-
-## Khó khăn thực tế
-> "Không biết prompt sao cho AI hiểu, kết quả sai lè, chỉnh tới chỉnh lui mất thời gian"
-
----
-
-## Framework CRAFT cho BrSE/Comtor
-
-| Yếu tố | Ý nghĩa | Ví dụ thực tế |
-| --- | --- | --- |
-| **C** - Context | Bối cảnh dự án | "Dự án maintenance hệ thống EC, khách là 部長 level" |
-| **R** - Role | Vai trò AI đóng | "Đóng vai BrSE senior 10 năm kinh nghiệm" |
-| **A** - Action | Hành động cần làm | "Viết email xin lỗi về delay 3 ngày" |
-| **F** - Format | Định dạng output | "Format: 件名 / 本文, tách rõ 原因 và 対応策" |
-| **T** - Tone | Giọng điệu | "Lịch sự nhưng thẳng thắn, thể hiện trách nhiệm" |
-
----
-
-## Demo: Prompt kém vs Prompt tốt
-
-### ❌ Prompt kém:
-\`\`\`
-Dịch cái này sang tiếng Nhật
-\`\`\`
-**Kết quả:** Dịch literal, sai tone, mất thuật ngữ chuyên ngành
-
-### ✅ Prompt CRAFT:
-\`\`\`
-[C] Dự án EC system. Tài liệu là mô tả chức năng thanh toán.
-[R] Technical writer chuyên tài liệu JP.
-[A] Dịch mô tả chức năng sau sang tiếng Nhật.
-[F] Giữ heading structure. Glossary:
-    - Thanh toán → 決済
-    - Giỏ hàng → カート
-    - Xác nhận → 確認
-[T] 基本設計書 level, đối tượng đọc là engineer khách.
----
-[NỘI DUNG CẦN DỊCH]
-\`\`\`
-**Kết quả:** Chính xác, đúng format, đúng tone, thuật ngữ nhất quán
-
----
-
-## Thư viện Prompt Template
-
-### Template 1: Email tiếng Nhật
-\`\`\`
-[C] Dự án [LOẠI], email gửi cho [CHỨC DANH] phía khách.
-[R] BrSE senior có kinh nghiệm giao tiếp khách JP.
-[A] Viết email [MỤC ĐÍCH]: [NỘI DUNG CHÍNH].
-[F] 件名 / 本文 (背景・原因・対応策・お願い)
-[T] ビジネス敬語, mức lịch sự phù hợp [CHỨC DANH].
-\`\`\`
-
-### Template 2: Tóm tắt Spec
-\`\`\`
-[C] Spec [LOẠI] cho module [TÊN MODULE].
-[R] BrSE reviewer cần brief cho team dev.
-[A] Tóm tắt theo: 概要 / 機能一覧 / 注意点 / 確認事項.
-[F] Tiếng Việt, bullet points, tối đa 2 trang.
-[T] Kỹ thuật, rõ ràng, actionable.
-\`\`\`
-
-### Template 3: Câu hỏi Confirm
-\`\`\`
-[C] Spec chức năng [TÊN], phase [PHASE].
-[R] QA reviewer 10 năm kinh nghiệm dự án JP.
-[A] Phát hiện điểm mơ hồ, sinh câu hỏi confirm.
-[F] Bảng: No. / 項目 / 不明点 / 確認したい内容
-[T] Chuyên nghiệp, trọng tâm, có priority.
-\`\`\`
-
-### Template 4: Weekly Report
-\`\`\`
-[C] Dự án [LOẠI], sprint [SỐ], team [SỐ NGƯỜI].
-[R] PM báo cáo cho khách.
-[A] Tổng hợp thành Weekly Report.
-[F] 今週の進捗 / 課題・リスク / 来週の予定
-[T] ビジネス敬語, ngắn gọn.
----
-[RAW DATA]
-\`\`\`
-
----
-
-### Template 5: Confirm Action Items từ Meeting
-\`\`\`
-[C] Meeting [TÊN], ngày [NGÀY], attendees: [DANH SÁCH].
-[R] Secretary ghi biên bản chuyên nghiệp dự án JP.
-[A] Trích xuất tất cả action items từ nội dung meeting.
-[F] Bảng: No. / Action Item / Assignee / Due Date / Status
-[T] Ngắn gọn, rõ owner và deadline, tiếng Việt.
----
-[NỘI DUNG MEETING]
-\`\`\`
-
----
-
-## Công cụ check & cải thiện prompt
-
-| Tool | Mô tả | Link |
-| --- | --- | --- |
-| Learn Prompting | Hướng dẫn toàn diện, miễn phí | learnprompting.org |
-| OpenAI Prompt Guide | Best practices chính thức từ OpenAI | platform.openai.com/docs/guides/prompt-engineering |
-| Anthropic Prompt Library | Thư viện prompt mẫu của Claude | docs.anthropic.com/en/prompt-library |
-| PromptPerfect | Auto-optimize prompt của bạn | promptperfect.jina.ai |
-| FlowGPT | Cộng đồng chia sẻ prompt | flowgpt.com |
-
----
-
-## Takeaway
-> *"CRAFT + Template = combo giải quyết gốc rễ 'không biết prompt' và 'output sai'. Prompt tốt hơn = Output tốt hơn = Ít chỉnh sửa hơn."*
 `
 },
 {
