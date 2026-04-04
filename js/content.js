@@ -126,13 +126,13 @@ const SECTIONS = [
 
 \`\`\`text
 Khách hàng (JP)
-   ↑         ↕        ↑
-   │   (giao tiếp)    │
-   │                 │
-BrSE / Comtor  ←→  Dev Team (VN)
+   ↑         ↕       
+   │   (giao tiếp)   
+   ↓                 
+BrSE / Comtor  ←-→  Dev Team (VN)
    ↑
    │
-  (Hỗ trợ chuyển đổi yêu cầu, đảm bảo chất lượng, quản lý tiến độ)
+  (Đảm bảo yêu cầu, đảm bảo chất lượng, quản lý tiến độ)
 \`\`\`
 ## Chuỗi công việc đặc thù trong mô hình Offshore
 
@@ -160,17 +160,19 @@ BrSE / Comtor  ←→  Dev Team (VN)
 - **Giao tiếp với khách hàng:**
   - Keigo/tone sai → mất trust
   - Thiếu context → yêu cầu bị hiểu sai
-  - Phản hồi chậm → blocker cho dev
+  - Báo cáo, giao tiếp kém hiệu quả → mất thời gian, lòng tin khách hàng với team
+  - Lượng thông tin, tài liệu nhiều → Phản hồi chậm, block công việc của nhiều bên
 
 - **Yêu cầu & Spec:**
   - Tài liệu dài/vô cấu trúc → mất nhiều thời gian đọc
-  - Thiếu confirmation questions → spec mơ hồ
+  - Thiếu confirmation questions → spec mơ hồ, mất thời gian đi lại với khách, rework nhiều lần
   - Không thống nhất format/glossary → sai khớp requirements
 
 - **Quản lý team:**
   - Report thủ công, tốn thời gian
   - Action item bị rơi giữa meeting và thực thi
   - Estimation không chuẩn → quá/thiếu tài nguyên
+  - Tốn nhiều thời gian vào những việc ít giá trị → CHẬM
 
 ---
 
@@ -191,7 +193,7 @@ Mục tiêu: với mỗi đầu việc — chỉ ra nút thắt, demo cách dùn
   time: '10 phút',
   icon: '🔒',
   markdown: `
-> 🙋 **Câu hỏi mở:** Khi bạn ghép nối "muốn dùng AI" với "sợ lộ data khách", bạn thường xử lý thế nào? Anonymize thủ công, hay dùng tool nào đó?
+> 🙋 **Câu hỏi mở:** Khi bạn ghép nối "muốn dùng AI" với "sợ lộ data khách", bạn thường xử lý thế nào? Hãy chia sẻ cách làm hiện tại của bạn
 
 ---
 
@@ -214,8 +216,8 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
 | Mức độ | Ví dụ | Tool phù hợp |
 | --- | --- | --- |
 | 🟢 An toàn | Template chung, thuật ngữ, grammar check | Bất kỳ AI nào (free tier được) |
-| 🟡 Cần xử lý | Spec đã anonymize, logic nghiệp vụ chung | Anonymize + AI thường, hoặc AI Pro (Copilot/Claude) |
-| 🔴 Cấm | Source code khách, data thật, credentials | Local tool hoặc hỏi vendor |
+| 🟡 Cần xử lý | Spec dự án, logic nghiệp vụ dự án | Anonymize + AI thường, hoặc AI Pro (Copilot/Gemini) |
+| 🔴 Đặc biệt nhạy cảm | Source code khách, data thật, credentials | Local tool (Cần xác nhận trước khi dùng với KH) |
 
 ---
 
@@ -251,14 +253,13 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
 
 **Cách thực hiện:**
 - Mua Gemini Pro ($20/tháng) → vào NotebookLM
-- Upload tài liệu cũ (anonymized) làm source
+- Upload tài liệu dự án làm source
 - Hỏi AI rút glossary / dịch spec dựa trên toàn bộ tài liệu
 
 **Khi dùng:**
 - ✅ Spec dài (20+ trang) + glossary phức tạp
 - ✅ Project dài hạn (3+ tháng) — cần glossary nhất quán
 - ✅ Team mới — share glossary chung
-- ❌ Ad-hoc task — overkill
 
 **Ưu điểm:**
 - **Cross-document Q&A** — context từ 10+ files cùng lúc
@@ -268,29 +269,29 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
 **Nhược điểm:**
 - Giao diện phức tạp hơn ChatGPT
 - Tốc độ chậm hơn (10-20s vs 5s)
-- Cần upload trước → không linh hoạt
 
 ---
 
-## GIẢI PHÁP 3: GitHub Copilot / Claude Pro (Tool premium + file local)
+## GIẢI PHÁP 3: GitHub Copilot / Claude Pro (Tool Premium + File local)
 
-**Mục đích:** Dùng tool có data security guarantee + kết hợp file local → cross-docs tài liệu mà ít anonymize hơn
+**Mục đích:** Dùng tool có data security guarantee + kết hợp file local → cross-docs tài liệu mà không cần anonymize
 
 **3 option:**
 
 - **GitHub Copilot Business** ($19/user/tháng) — Tích hợp IDE, no-training guarantee
 - **Claude Pro** ($20/tháng) — Cao context (200K), quality cao, turn off "Improve Claude"
-- **Claude API (team)** — Per-token, research mode (zero data retention)
 
 **Cách thực hiện:**
 - Mở folder project local trong IDE / chat
 - Attach multiple files (spec cũ, glossary, QA list)
 - Chat với file — AI đọc context từ toàn bộ files
+> 💡 (Có thể kết hợp với các MCP Server khác để có thể access vào các data sources khác như Confluence, Google Drive, Figma...)
 
 **Khi dùng:**
-- ✅ Data nhạy cảm hơn — anonymize ít hơn được
-- ✅ Cross-docs — dùng file browser hoặc clipboard paste
+- ✅ Data nhạy cảm hơn
 - ✅ Team setup — Copilot Business cho cả team
+- ✅ Cross-docs — dùng file browser hoặc clipboard paste
+- ✅ Cần tương tác (input/output) nhiều với file (edit spec, comment code...)
 - ❌ Siêu sensitive — vẫn nên anonymize 100%
 
 **Ưu điểm:**
@@ -301,7 +302,7 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
 
 **Nhược điểm:**
 - Phí cao ($19-20/user/tháng)
-- Không tự động rút glossary
+- Cần setup ban đầu (IDE, file structure)
 
 ---
 
@@ -312,10 +313,9 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
 | **Giá** | Miễn phí | $20/tháng | $19-20/user/tháng |
 | **Data policy** | User responsibility | Google Workspace | Guarantee no training |
 | **Cross-docs** | ❌ Không | ✅ (10+ files upload) | ✅ (file browser/clipboard) |
-| **Glossary auto-extract** | ❌ Thủ công | ✅ Tự động | ❌ Thủ công |
-| **Team sharing** | ❌ Khó sync | ✅ Easy (share notebook) | ✅ Easy (team license) |
-| **Tốc độ** | ⚡ Nhanh | 🟡 Trung bình | ⚡ Nhanh |
-| **Phù hợp nhất** | 90% case | Spec dài + glossary phức | Data nhạy cảm + cross-docs |
+| **Team sharing** | ❌ Khó sync | ✅ Easy (share notebook) | ✅ Public output rồi mới share được cho team |
+| **Tốc độ phản hồi** | ⚡ Nhanh | 🟡 Trung bình | ⚡ Nhanh |
+| **Phù hợp nhất** | 90% case | Nhiều tài liệu + cần sharing với nhiều bên | Data nhạy cảm + cần brainstorming nhiều xử lý phức tạp với AI |
 
 ---
 
@@ -438,13 +438,29 @@ Dịch cái này sang tiếng Nhật
 
 ## Công cụ check & cải thiện prompt
 
+### 🔧 Auto-optimize — Dán prompt vào, nhận lại prompt tốt hơn
+
+| Tool | Tính năng nổi bật | Link |
+| --- | --- | --- |
+| **ChatGPT — Improve Prompt** ✨ | Nút "Improve" có sẵn trong ChatGPT — paste prompt thô, AI tự viết lại | chat.openai.com |
+| **Claude Console — Generate a prompt** | Mô tả ý tưởng bằng tiếng tự nhiên → Claude sinh CRAFT-style prompt hoàn chỉnh | console.anthropic.com |
+| **PromptPerfect** | Optimize prompt cho từng model cụ thể (GPT-4, Claude, Gemini...) | promptperfect.jina.ai |
+| **Anthropic Workbench** | Test & so sánh nhiều phiên bản prompt cùng lúc | console.anthropic.com/workbench |
+
+### 📚 Tài liệu học — Nền tảng & Best practices
+
 | Tool | Mô tả | Link |
 | --- | --- | --- |
-| Learn Prompting | Hướng dẫn toàn diện, miễn phí | learnprompting.org |
-| OpenAI Prompt Guide | Best practices chính thức từ OpenAI | platform.openai.com/docs/guides/prompt-engineering |
-| Anthropic Prompt Library | Thư viện prompt mẫu của Claude | docs.anthropic.com/en/prompt-library |
-| PromptPerfect | Auto-optimize prompt của bạn | promptperfect.jina.ai |
-| FlowGPT | Cộng đồng chia sẻ prompt | flowgpt.com |
+| **Learn Prompting** | Hướng dẫn toàn diện, miễn phí, có interactive examples | learnprompting.org |
+| **OpenAI Prompt Guide** | Best practices chính thức từ OpenAI | platform.openai.com/docs/guides/prompt-engineering |
+| **Anthropic Prompt Library** | Thư viện 60+ prompt mẫu theo use case thực tế | docs.anthropic.com/en/prompt-library |
+
+### 🌐 Cộng đồng — Tham khảo & chia sẻ prompt
+
+| Tool | Mô tả | Link |
+| --- | --- | --- |
+| **FlowGPT** | Cộng đồng chia sẻ prompt, lọc theo use case | flowgpt.com |
+| **PromptBase** | Marketplace prompt chất lượng cao, có rating | promptbase.com |
 
 ---
 
