@@ -1,40 +1,40 @@
-# コーディング規約 — 農産物在庫管理システム
+# Coding Conventions — Hệ thống Quản lý Tồn kho Nông sản
 
-**バージョン:** 1.2
-**最終更新:** 2025/05/20
+**Phiên bản:** 1.2
+**Cập nhật lần cuối:** 2025/05/20
 
 ---
 
-## 1. 全般ルール
+## 1. Quy tắc chung
 
-### ブランチ命名規則
+### Đặt tên branch
 ```
-feature/INV-{ticket番号}_{簡潔な説明}
-bugfix/BUG-{番号}_{簡潔な説明}
-hotfix/HOTFIX-{番号}_{簡潔な説明}
+feature/INV-{số ticket}_{mô tả ngắn gọn}
+bugfix/BUG-{số}_{mô tả ngắn gọn}
+hotfix/HOTFIX-{số}_{mô tả ngắn gọn}
 ```
-例: `feature/INV-180_stocktaking-list-api`
+Ví dụ: `feature/INV-180_stocktaking-list-api`
 
-### コミットメッセージ
+### Commit message
 ```
 [INV-180] Add stocktaking list API endpoint
 [BUG-301] Fix negative quantity validation
 ```
-- 英語で記述
-- 先頭にチケット番号
-- 動詞は原形（Add, Fix, Update, Remove）
+- Viết bằng tiếng Anh
+- Bắt đầu bằng số ticket
+- Động từ ở dạng nguyên mẫu (Add, Fix, Update, Remove)
 
-### プルリクエスト
-- タイトル: `[INV-180] 棚卸一覧 API 実装`（日本語可）
-- レビュアー: Tran T.B（BE）/ Le V.C（FE）— 相互レビュー
-- マージ: Squash merge
-- CI全グリーンが必須
+### Pull Request
+- Tiêu đề: `[INV-180] 棚卸一覧 API 実装` (tiếng Nhật được phép)
+- Reviewer: Tran T.B (BE) / Le V.C (FE) — review chéo
+- Merge: Squash merge
+- CI phải pass toàn bộ mới được merge
 
 ---
 
-## 2. バックエンド（Java / Spring Boot）
+## 2. Backend (Java / Spring Boot)
 
-### パッケージ構成
+### Cấu trúc package
 ```
 com.agrifoods.inventory
 ├── controller/     # REST Controller
@@ -48,27 +48,28 @@ com.agrifoods.inventory
 └── util/           # Utility
 ```
 
-### 命名規則
-| 種類 | 規則 | 例 |
+### Quy tắc đặt tên
+
+| Loại | Quy tắc | Ví dụ |
 | --- | --- | --- |
 | Controller | `XXXController` | `StocktakingController` |
 | Service | `XXXService` / `XXXServiceImpl` | `StocktakingService` |
 | Repository | `XXXRepository` | `StocktakingRepository` |
-| Entity | テーブル名に対応（PascalCase） | `StocktakingRecord` |
+| Entity | Tương ứng tên bảng (PascalCase) | `StocktakingRecord` |
 | DTO | `XXXRequest` / `XXXResponse` | `StocktakingRegisterRequest` |
 
-### APIエンドポイント命名
+### Đặt tên API endpoint
 ```
-GET    /api/v1/stocktaking          # 一覧取得
-GET    /api/v1/stocktaking/{id}     # 詳細取得
-POST   /api/v1/stocktaking          # 新規登録
-PUT    /api/v1/stocktaking/{id}     # 更新
-DELETE /api/v1/stocktaking/{id}     # 削除
+GET    /api/v1/stocktaking          # Lấy danh sách
+GET    /api/v1/stocktaking/{id}     # Lấy chi tiết
+POST   /api/v1/stocktaking          # Tạo mới
+PUT    /api/v1/stocktaking/{id}     # Cập nhật
+DELETE /api/v1/stocktaking/{id}     # Xóa
 ```
 
-### エラーハンドリング
-- `@RestControllerAdvice` で共通ハンドリング
-- エラーレスポンス形式:
+### Xử lý lỗi
+- Dùng `@RestControllerAdvice` để xử lý lỗi tập trung
+- Format response lỗi:
 ```json
 {
   "code": "E001",
@@ -79,81 +80,82 @@ DELETE /api/v1/stocktaking/{id}     # 削除
 
 ---
 
-## 3. フロントエンド（React / TypeScript）
+## 3. Frontend (React / TypeScript)
 
-### ディレクトリ構成
+### Cấu trúc thư mục
 ```
 src/
-├── components/     # 共通コンポーネント
-├── features/       # 機能別フォルダ
+├── components/     # Component dùng chung
+├── features/       # Thư mục theo chức năng
 │   ├── stocktaking/
 │   │   ├── pages/
 │   │   ├── components/
 │   │   ├── hooks/
 │   │   └── api/
-├── hooks/          # 共通フック
-├── utils/          # ユーティリティ
-└── types/          # 型定義
+├── hooks/          # Hook dùng chung
+├── utils/          # Utility
+└── types/          # Type definitions
 ```
 
-### 命名規則
-- コンポーネント: PascalCase (`StocktakingList.tsx`)
-- フック: camelCase + use prefix (`useStocktaking.ts`)
-- 定数: UPPER_SNAKE_CASE
+### Quy tắc đặt tên
+- Component: PascalCase (`StocktakingList.tsx`)
+- Hook: camelCase + tiền tố `use` (`useStocktaking.ts`)
+- Hằng số: UPPER_SNAKE_CASE
 - CSS Modules: `[component].module.css`
 
-### 状態管理
-- サーバー状態: TanStack Query (React Query)
-- ローカル状態: useState / useReducer
-- グローバル状態: Context API（最小限）
+### Quản lý state
+- Server state: TanStack Query (React Query)
+- Local state: useState / useReducer
+- Global state: Context API (tối thiểu hóa)
 
 ---
 
-## 4. テスト規約
+## 4. Quy tắc test
 
-### バックエンド
+### Backend
 - Unit Test: JUnit 5 + Mockito
-- 命名: `should_期待結果_when_条件()`
-- カバレッジ目標: Service層 80%以上
+- Đặt tên: `should_kếtQuảMongMuốn_when_điềuKiện()`
+- Mục tiêu coverage: Service layer ≥ 80%
 
-### フロントエンド
+### Frontend
 - Unit Test: Jest + React Testing Library
-- E2E: Playwright（主要フロー3本以上）
+- E2E: Playwright (ít nhất 3 luồng chính)
 
-### QA テスト
-- テストケース: Excel管理（Jiraリンク付き）
-- エビデンス: スクリーンショット + 手順ログ
-- バグ報告: Jira BUGチケット（再現手順必須）
+### QA Test
+- Test case: Quản lý bằng Excel (có link Jira)
+- Evidence: Screenshot + nhật ký thao tác
+- Báo cáo bug: Jira BUG ticket (bắt buộc ghi bước tái hiện)
 
 ---
 
-## 5. デプロイ規約
+## 5. Quy tắc deploy
 
-### 環境
-| 環境 | URL | 用途 |
+### Môi trường
+
+| Môi trường | URL | Mục đích |
 | --- | --- | --- |
-| Dev | dev.agrifoods-inv.internal | 開発確認 |
-| Staging | stg.agrifoods-inv.internal | UAT・顧客確認 |
-| Production | app.agrifoods-inv.jp | 本番 |
+| Dev | dev.agrifoods-inv.internal | Kiểm tra trong quá trình phát triển |
+| Staging | stg.agrifoods-inv.internal | UAT & khách hàng xác nhận |
+| Production | app.agrifoods-inv.jp | Production |
 
-### デプロイフロー
+### Deploy flow
 1. `feature/*` → `develop` (PR + Review)
-2. `develop` → Dev環境（自動デプロイ）
-3. `develop` → `release/*` → Staging（手動デプロイ）
-4. `release/*` → `main` → Production（承認後デプロイ）
+2. `develop` → môi trường Dev (tự động deploy)
+3. `develop` → `release/*` → Staging (deploy thủ công)
+4. `release/*` → `main` → Production (deploy sau khi được phê duyệt)
 
 ---
 
-## 6. よくある質問（新メンバー向け）
+## 6. FAQ cho member mới
 
-**Q: ローカル環境のセットアップ方法は？**
-→ README.md の「Getting Started」参照。Docker Compose で一発起動。
+**Q: Cách setup môi trường local?**
+→ Xem `source_03_environment_setup.md` hoặc mục "Getting Started" trong README.md. Khởi động bằng Docker Compose một lệnh duy nhất.
 
-**Q: テストデータはどうやって投入する？**
-→ `src/main/resources/db/testdata/` 配下のSQLを実行。
+**Q: Cách nhập test data?**
+→ Chạy SQL trong thư mục `src/main/resources/db/testdata/`
 
-**Q: APIの仕様書はどこ？**
-→ Swagger UI: `http://localhost:8080/swagger-ui.html`（ローカル起動後）
+**Q: Tài liệu API ở đâu?**
+→ Swagger UI: `http://localhost:8080/swagger-ui.html` (sau khi khởi động local)
 
-**Q: 日本語を使う箇所は？**
-→ コミットメッセージ: 英語、PRタイトル: 日本語可、コード内コメント: 英語、エラーメッセージ: 日本語（ユーザー向け）
+**Q: Chỗ nào dùng tiếng Nhật?**
+→ Commit message: tiếng Anh | PR title: tiếng Nhật được phép | Comment trong code: tiếng Anh | Error message hiển thị cho user: tiếng Nhật

@@ -1,89 +1,92 @@
-# 農産物在庫管理システム — プロジェクト概要
+# Hệ thống Quản lý Tồn kho Nông sản — Tổng quan dự án
 
-## 基本情報
+## 1. Thông tin cơ bản
 
-| 項目 | 内容 |
+| Hạng mục | Nội dung |
 | --- | --- |
-| **プロジェクト名** | 農産物在庫管理システム開発 |
-| **お客様** | 株式会社アグリフーズ（仮称） |
-| **契約形態** | 準委任契約（ラボ型開発） |
-| **開発期間** | 2025年3月〜2025年9月（7ヶ月） |
-| **開発体制** | オフショア開発（ベトナム） |
-| **使用言語** | 日本語（仕様書・コミュニケーション） |
+| **Tên dự án** | Phát triển Hệ thống Quản lý Tồn kho Nông sản |
+| **Khách hàng** | Công ty TNHH AgriFoods (tên giả định) |
+| **Hình thức hợp đồng** | Lab-type (準委任契約) |
+| **Thời gian phát triển** | Tháng 3/2025 ~ Tháng 9/2025 (7 tháng) |
+| **Mô hình phát triển** | Offshore development (Việt Nam) |
+| **Ngôn ngữ sử dụng** | Tiếng Nhật (tài liệu spec & giao tiếp với khách hàng) |
 
-## プロジェクト目的
-農産物の在庫管理を効率化し、出荷計画と連携することで、廃棄ロスの削減と出荷効率の向上を実現する。
+## 2. Mục tiêu dự án
 
-現状は Excel + 紙ベースで在庫管理 → システム化により：
-- 在庫のリアルタイム把握
-- 出荷計画の自動提案
-- 廃棄ロスの30%削減（目標）
+Nâng cao hiệu quả quản lý tồn kho nông sản, liên kết với kế hoạch xuất hàng để giảm thiểu hao hụt và tối ưu hóa quy trình xuất hàng.
 
-## 開発チーム
+**Hiện trạng:** Quản lý tồn kho thủ công bằng Excel + giấy tờ → Sau khi hệ thống hóa:
+- Nắm bắt tồn kho theo thời gian thực
+- Tự động đề xuất kế hoạch xuất hàng
+- Giảm 30% hao hụt nông sản (mục tiêu)
 
-### お客様側
-| 名前 | 役割 | 担当 |
+## 3. Đội ngũ dự án
+
+### Phía khách hàng (Nhật Bản)
+
+| Tên | Vai trò | Phụ trách |
 | --- | --- | --- |
-| 田中部長 | プロジェクトオーナー | 最終意思決定、月次レビュー |
-| 鈴木PM | プロジェクトマネージャー | 日常的な窓口、仕様確認 |
+| Tanaka (田中 部長) | Project Owner | Quyết định cuối cùng, review hàng tháng |
+| Suzuki (鈴木 PM) | Project Manager | Đầu mối liên lạc hàng ngày, xác nhận spec |
 
-### 開発側（オフショア）
-| 名前 | 役割 | 担当 |
+### Phía phát triển (Việt Nam — Offshore)
+
+| Tên | Vai trò | Phụ trách |
 | --- | --- | --- |
-| Nguyen V.A | BrSE | 顧客対応、チーム管理、翻訳 |
-| Tran T.B | バックエンドSE（シニア） | API設計・実装、コードレビュー |
-| Le V.C | フロントエンドSE | 画面実装、UI/UX |
-| Pham T.D | バックエンドSE（ジュニア） | API実装、バグ修正 |
-| Hoang M.E | QA | テスト設計・実行 |
+| Nguyen V.A | BrSE | Giao tiếp khách hàng, quản lý team, dịch thuật |
+| Tran T.B | Backend SE (Senior) | Thiết kế & implement API, code review |
+| Le V.C | Frontend SE | Implement màn hình, UI/UX |
+| Pham T.D | Backend SE (Junior) | Implement API, sửa bug |
+| Hoang M.E | QA | Thiết kế & thực hiện test |
 
-## 技術スタック
+## 4. Tech Stack
 
-| レイヤー | 技術 |
+| Layer | Công nghệ |
 | --- | --- |
-| フロントエンド | React 18 + TypeScript |
-| バックエンド | Java 17 + Spring Boot 3 |
-| データベース | PostgreSQL 15 |
-| インフラ | AWS (ECS, RDS, S3) |
+| Frontend | React 18 + TypeScript |
+| Backend | Java 17 + Spring Boot 3 |
+| Database | PostgreSQL 15 |
+| Infrastructure | AWS (ECS, RDS, S3) |
 | CI/CD | GitHub Actions |
-| コミュニケーション | Teams, Backlog |
-| タスク管理 | Jira |
+| Communication | Microsoft Teams, Backlog |
+| Task management | Jira |
 
-## スケジュール概要
+## 5. Kế hoạch tổng thể
 
-| フェーズ | 期間 | 内容 |
+| Giai đoạn | Thời gian | Nội dung |
 | --- | --- | --- |
-| 要件定義 | 3月〜4月 | 機能要件整理、画面設計 |
-| Sprint 1-10 | 4月〜6月 | 基本機能開発（マスタ、入出庫） |
-| Sprint 11-16 | 6月〜7月 | 応用機能開発（棚卸、出荷指示、廃棄） |
-| UAT | 7月中旬 | ユーザー受入テスト |
-| リリース | 8月第1週 | 本番リリース |
+| Phân tích yêu cầu | Tháng 3–4 | Tổng hợp functional requirements, thiết kế màn hình |
+| Sprint 1–10 | Tháng 4–6 | Phát triển chức năng cơ bản (master data, nhập/xuất kho) |
+| Sprint 11–16 | Tháng 6–7 | Phát triển chức năng nâng cao (kiểm kê, chỉ thị xuất hàng, hủy hàng) |
+| UAT | Giữa tháng 7 | User Acceptance Testing |
+| Release | Tuần 1 tháng 8 | Triển khai production |
 
-## 主要機能一覧
+## 6. Danh sách chức năng chính
 
-1. **マスタ管理** — 品目、倉庫、取引先、ユーザー
-2. **入庫管理** — 収穫・仕入れの入庫登録、一覧表示
-3. **出庫管理** — 出庫指示、出庫実績登録
-4. **在庫一覧** — リアルタイム在庫確認、フィルタ・ソート
-5. **出荷管理** — 出荷計画、出荷指示、出荷実績CSV出力
-6. **棚卸機能** — 棚卸一覧、棚卸登録、結果出力（PDF）
-7. **出荷指示** — 複数出荷先への一括指示
-8. **廃棄登録** — 廃棄申請、2段階承認フロー
-9. **ダッシュボード** — 在庫推移、廃棄率、出荷効率
-10. **レポート** — 月次在庫報告、廃棄レポート
+1. **Quản lý Master Data** — Danh mục mặt hàng, kho, đối tác, người dùng
+2. **Quản lý nhập kho** — Đăng ký nhập kho (thu hoạch/mua vào), danh sách nhập kho
+3. **Quản lý xuất kho** — Chỉ thị xuất kho, đăng ký thực tế xuất kho
+4. **Danh sách tồn kho** — Kiểm tra tồn kho thời gian thực, filter & sort
+5. **Quản lý xuất hàng** — Kế hoạch xuất hàng, chỉ thị xuất, export CSV thực tế xuất hàng
+6. **Chức năng kiểm kê (棚卸)** — Danh sách kiểm kê, đăng ký kiểm kê, xuất kết quả (PDF)
+7. **Chỉ thị xuất hàng hàng loạt** — Chỉ thị đồng thời cho nhiều điểm nhận hàng
+8. **Đăng ký hủy hàng (廃棄)** — Yêu cầu hủy hàng, quy trình phê duyệt 2 bước
+9. **Dashboard** — Biểu đồ tồn kho, tỉ lệ hao hụt, hiệu suất xuất hàng
+10. **Báo cáo** — Báo cáo tồn kho hàng tháng, báo cáo hao hụt
 
-## コミュニケーションルール
+## 7. Quy tắc trao đổi
 
-### 定例会議
-- **週次定例:** 毎週火曜 14:00-15:00（Teams）
-- **デイリースタンドアップ:** 毎日 10:00（チーム内、15分）
-- **Sprint Review:** Sprint最終日（2週間ごと）
+### Cuộc họp định kỳ
+- **Weekly meeting:** Thứ Ba hàng tuần, 14:00–15:00 (Teams)
+- **Daily standup:** Mỗi ngày 10:00 (nội bộ team, 15 phút)
+- **Sprint Review:** Ngày cuối mỗi Sprint (2 tuần/lần)
 
-### 報告フォーマット
-- **日報:** Slack #daily-report チャンネル（日本語）
-- **週報:** メール送付（田中部長、鈴木PM宛）
-- **バグ報告:** Jiraチケット（日本語、スクリーンショット添付）
+### Format báo cáo
+- **Báo cáo ngày (日報):** Slack channel `#daily-report` (viết bằng tiếng Nhật)
+- **Báo cáo tuần (週報):** Gửi email (Tanaka 部長 & Suzuki PM)
+- **Báo cáo bug:** Jira ticket (tiếng Nhật, đính kèm screenshot)
 
-### エスカレーションルール
-- 通常質問 → 鈴木PM（1営業日以内に回答）
-- 緊急課題 → 鈴木PM + 田中部長（当日中）
-- 仕様変更 → 鈴木PM経由で承認フロー
+### Quy tắc escalation
+- Câu hỏi thông thường → Suzuki PM (trả lời trong 1 ngày làm việc)
+- Vấn đề khẩn cấp → Suzuki PM + Tanaka 部長 (trong ngày)
+- Thay đổi spec → Qua Suzuki PM → approval flow

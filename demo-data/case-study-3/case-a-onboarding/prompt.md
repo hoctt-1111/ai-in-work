@@ -1,10 +1,12 @@
 # Prompt — Onboarding Kit cho member mới
 
 ## Upload vào NotebookLM
-Upload các file làm sources:
-- `source_01_project_overview.md` — Tổng quan dự án
-- `source_02_coding_conventions.md` — Coding conventions
-- Thêm spec files từ `case-spec/` folder nếu muốn demo đầy đủ
+Upload tất cả hoặc chọn lọc các file làm sources:
+- `source_01_project_overview.md` — Tổng quan dự án, team, tech stack, lịch trình
+- `source_02_coding_conventions.md` — Coding conventions, naming rules, deploy flow
+- `source_03_environment_setup.md` — Hướng dẫn setup môi trường local
+- `source_04_git_workflow.md` — Git workflow, quy trình PR & review
+- `source_05_domain_glossary.md` — Glossary thuật ngữ nghiệp vụ nông nghiệp & hệ thống
 
 ## Prompt 1 — Tạo Onboarding Document
 ```
