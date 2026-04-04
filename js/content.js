@@ -29,7 +29,7 @@ const SECTIONS = [
 - **Nguồn dữ liệu:**
   - Kết quả khảo sát BrSE/Comtor thực tế
   - Insight về quy trình, đặc thù công việc BrSE/Comtor trong phát triển phần mềm với KH Nhật Bản
-- **Tổng thời lượng:** ~115 phút
+- **Tổng thời lượng:** ~120 phút
 
 ### Survey snapshot
 
@@ -49,12 +49,12 @@ const SECTIONS = [
 | 0 | <a class="agenda-link" data-goto="1">📊 Opening & Warmup — Thực trạng từ Survey</a> | 5 phút |
 | 1 | <a class="agenda-link" data-goto="2">🌏 Bối cảnh: Vai trò BrSE/Comtor & AI là "must-have"</a> | 5 phút |
 | 2 | <a class="agenda-link" data-goto="3">🔒 Nguyên tắc Vàng: Bảo mật & Compliance</a> | 10 phút |
-| 3 | <a class="agenda-link" data-goto="4">🎯 Kỹ thuật Prompt — Framework CRAFT</a> | 10 phút |
+| 3 | <a class="agenda-link" data-goto="4">🎯 Kỹ thuật Prompt — Framework CRAFT</a> | 15 phút |
 | 4 | <a class="agenda-link" data-goto="5">✉️ Case Study 1 — Giao tiếp khách hàng bằng tiếng Nhật</a> | 20 phút |
 | 5 | <a class="agenda-link" data-goto="6">📑 Case Study 2 — Đọc hiểu & Viết Specification</a> | 25 phút |
 | 6 | <a class="agenda-link" data-goto="7">📋 Case Study 3 — Quản lý dự án với AI</a> | 15 phút |
 | 7 | <a class="agenda-link" data-goto="8">💡 Case Study 4 — Ứng dụng AI sáng tạo khác</a> | 10 phút |
-| 8 | <a class="agenda-link" data-goto="9">✅ Quy trình Hậu kiểm — AI output ≠ Final output</a> | 5 phút |
+| 8 | <a class="agenda-link" data-goto="9">✅ Quy trình Hậu kiểm — AI output ≠ Final output</a> | 10 phút |
 | 9 | <a class="agenda-link" data-goto="10">🚀 Closing — Lộ trình áp dụng & Tài nguyên</a> | 5 phút |
 
 ---
@@ -327,7 +327,7 @@ Trong mô hình outsourcing Nhật Bản, vi phạm NDA có thể dẫn đến m
   id: 4,
   title: 'Kỹ thuật Prompt — Framework CRAFT',
   shortTitle: 'Prompt CRAFT',
-  time: '10 phút',
+  time: '15 phút',
   icon: '🎯',
   markdown: `
 > 🙋 **Câu hỏi mở:** Khi AI cho output không đúng ý, bạn thường làm gì tiếp theo? Bạn có cách nào để làm cho prompt hiệu quả hơn không?
@@ -1486,7 +1486,7 @@ Tôi cần 1 máy tính online hỗ trợ:
   id: 9,
   title: 'Quy trình Hậu kiểm — AI output ≠ Final output',
   shortTitle: 'Hậu kiểm',
-  time: '5 phút',
+  time: '10 phút',
   icon: '✅',
   markdown: `
 ## Dữ liệu Survey
