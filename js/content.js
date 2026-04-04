@@ -442,25 +442,23 @@ Dịch cái này sang tiếng Nhật
 
 | Tool | Tính năng nổi bật | Link |
 | --- | --- | --- |
-| **ChatGPT — Improve Prompt** ✨ | Nút "Improve" có sẵn trong ChatGPT — paste prompt thô, AI tự viết lại | chat.openai.com |
-| **Claude Console — Generate a prompt** | Mô tả ý tưởng bằng tiếng tự nhiên → Claude sinh CRAFT-style prompt hoàn chỉnh | console.anthropic.com |
-| **PromptPerfect** | Optimize prompt cho từng model cụ thể (GPT-4, Claude, Gemini...) | promptperfect.jina.ai |
-| **Anthropic Workbench** | Test & so sánh nhiều phiên bản prompt cùng lúc | console.anthropic.com/workbench |
+| **ChatGPT — Improve Prompt** ✨ | Prompt Improver sẵn trong ChatGPT — paste prompt thô, AI tự viết lại | [chat.openai.com](https://chat.openai.com) |
+| **Prompt Enhancement** | Nhập prompt của bạn, hệ thống sẽ giúp bạn đề xuất prompt tốt hơn | [maxai.co](https://www.maxai.co/ai-tools/ai-writer/prompt-enhancement/) |
 
 ### 📚 Tài liệu học — Nền tảng & Best practices
 
 | Tool | Mô tả | Link |
 | --- | --- | --- |
-| **Learn Prompting** | Hướng dẫn toàn diện, miễn phí, có interactive examples | learnprompting.org |
-| **OpenAI Prompt Guide** | Best practices chính thức từ OpenAI | platform.openai.com/docs/guides/prompt-engineering |
-| **Anthropic Prompt Library** | Thư viện 60+ prompt mẫu theo use case thực tế | docs.anthropic.com/en/prompt-library |
+| **Learn Prompting** | Hướng dẫn toàn diện, miễn phí, có interactive examples | [learnprompting.org](https://learnprompting.org) |
+| **OpenAI Prompt Guide** | Best practices chính thức từ OpenAI | [platform.openai.com](https://platform.openai.com/docs/guides/prompt-engineering) |
+| **Anthropic Prompt Library** | Thư viện 60+ prompt mẫu theo use case thực tế | [docs.anthropic.com](https://docs.anthropic.com/en/prompt-library) |
 
 ### 🌐 Cộng đồng — Tham khảo & chia sẻ prompt
 
 | Tool | Mô tả | Link |
 | --- | --- | --- |
-| **FlowGPT** | Cộng đồng chia sẻ prompt, lọc theo use case | flowgpt.com |
-| **PromptBase** | Marketplace prompt chất lượng cao, có rating | promptbase.com |
+| **FlowGPT** | Cộng đồng chia sẻ prompt, lọc theo use case | [flowgpt.com](https://flowgpt.com) |
+| **PromptBase** | Marketplace prompt chất lượng cao, có rating | [promptbase.com](https://promptbase.com) |
 
 ---
 
