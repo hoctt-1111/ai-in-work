@@ -1,5 +1,6 @@
 # Case C — Prompt tạo 議事録 từ transcript
 
+```
 [CONTEXT] 
 Meeting giữa team offshore VN và khách hàng JP.
 Dự án: Hệ thống quản lý nông nghiệp.
@@ -24,3 +25,4 @@ Chỉ ghi nội dung quan trọng, không ghi câu xã giao.
 ---
 
 [TRANSCRIPT - paste nội dung từ file 01_meeting_transcript.md]
+```

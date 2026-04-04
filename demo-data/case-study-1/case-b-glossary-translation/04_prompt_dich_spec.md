@@ -1,5 +1,6 @@
 # Case B — Bước 2: Prompt dịch spec (dùng trong NotebookLM có glossary)
 
+```
 Dựa trên bảng thuật ngữ đã tạo ở trên, dịch nội dung spec sau sang tiếng Việt.
 
 Yêu cầu:
@@ -26,3 +27,4 @@ Yêu cầu:
   - 出荷予定日
   - 出荷先（プルダウン選択）
   - 備考
+```

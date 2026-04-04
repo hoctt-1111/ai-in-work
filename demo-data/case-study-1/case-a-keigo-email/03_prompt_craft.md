@@ -1,5 +1,6 @@
 # Case A — Prompt CRAFT (✅ Demo so sánh)
 
+```
 [CONTEXT] 
 Dự án offshore phát triển hệ thống quản lý cho khách hàng Nhật Bản.
 Email gửi cho 部長 (trưởng phòng phía khách). Relationship: hợp tác 2 năm, trust tốt.
@@ -22,3 +23,4 @@ Nội dung cần truyền đạt:
 [TONE] 
 ビジネス敬語, mức lịch sự cao phù hợp 部長 level.
 Tone xin lỗi nhưng thể hiện đã chủ động xử lý, có trách nhiệm.
+```

@@ -1,5 +1,6 @@
 # Case D — Bước 1: Prompt tạo script presentation
 
+```
 [CONTEXT] 
 BrSE chuẩn bị present Sprint 5 demo cho 田中部長 và 佐藤課長 phía khách.
 Dự án: Hệ thống quản lý nông nghiệp.
@@ -25,3 +26,4 @@ Mỗi phần ghi rõ:
 [TONE] 
 ですます体, lịch sự nhưng tự tin. 
 Phù hợp 部長 + 課長 level.
+```

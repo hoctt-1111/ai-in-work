@@ -1,5 +1,6 @@
 # Case C — Prompt tóm tắt meeting cho dev team (tiếng Việt)
 
+```
 Từ transcript cuộc họp bên dưới, tóm tắt nội dung bằng tiếng Việt cho dev team.
 
 Format:
@@ -23,3 +24,4 @@ Format:
 ---
 
 [TRANSCRIPT - paste nội dung từ file 01_meeting_transcript.md]
+```
