@@ -1,5 +1,3 @@
-# Case G — Outline ban đầu (Input cho AI)
-
 ## Bối cảnh
 Cần tạo slide sharing kiến thức cho team BrSE/Comtor về "Ứng dụng AI thực chiến". PowerPoint mất 4-8 giờ design. Quyết định thử AI tạo website presentation.
 

@@ -1,5 +1,3 @@
-# Case G — So sánh Trước / Sau
-
 ## Workflow truyền thống (PowerPoint)
 
 ### Timeline

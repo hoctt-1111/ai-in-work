@@ -1,5 +1,3 @@
-# Case A — Follow-up prompt (Yêu cầu giải thích keigo)
-
 Email trên rất tốt. Bây giờ hãy:
 
 1. Liệt kê các pattern 敬語 (keigo) đã dùng trong email

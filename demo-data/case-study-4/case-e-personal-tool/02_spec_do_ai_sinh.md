@@ -1,5 +1,3 @@
-# Case E — Spec do AI sinh (Trích lược)
-
 ## Spec được AI sinh ra từ ý tưởng thô
 
 > Đây là bản trích lược — spec đầy đủ dài 13 trang

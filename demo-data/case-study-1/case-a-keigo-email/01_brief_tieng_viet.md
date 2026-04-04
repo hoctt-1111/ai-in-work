@@ -1,5 +1,3 @@
-# Case A — Brief tiếng Việt (Input cho AI)
-
 ## Tình huống
 - **Dự án:** Hệ thống quản lý nông nghiệp (anonymize: System X)
 - **Gửi cho:** 田中部長 (Tanaka buchō) — trưởng phòng phía khách

@@ -1,5 +1,3 @@
-# Case B — Bước 3: Input glossary vào ChatGPT
-
 ## Cách 1: Custom Instructions
 
 > Vào ChatGPT → Settings → Personalization → Custom Instructions

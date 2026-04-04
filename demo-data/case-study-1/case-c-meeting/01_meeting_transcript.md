@@ -1,5 +1,3 @@
-# Case C — Meeting Transcript mẫu (Giả lập output từ Notta / Teams)
-
 ## Meeting Info
 - **日時:** 2026/03/28 14:00-15:00 (JST)
 - **参加者:** 

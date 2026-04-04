@@ -1,5 +1,3 @@
-# Case A — Kết quả & Đánh giá
-
 ## Output thực tế
 
 ### Số liệu

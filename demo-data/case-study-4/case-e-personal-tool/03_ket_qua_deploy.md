@@ -1,5 +1,3 @@
-# Case E — Kết quả & Deploy
-
 ## Quá trình phát triển
 
 ### Timeline

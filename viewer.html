@@ -28,6 +28,34 @@
             max-width: 860px; margin: 0 auto; padding: 40px 40px 80px;
         }
         .viewer-body h1:first-child { margin-top: 0; }
+        /* Enhanced code blocks for prompt content */
+        .viewer-body pre {
+            border: 2px solid var(--color-primary);
+            border-radius: 10px;
+            padding: 14px 54px 14px 20px;
+            margin: 16px 0;
+        }
+        [data-theme="dark"] .viewer-body pre {
+            border-color: #5a9fd4;
+        }
+        /* Always-visible, larger copy button inside code blocks */
+        .viewer-body .code-copy-btn {
+            opacity: 1 !important;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--color-primary);
+            color: #fff;
+            border: none;
+        }
+        .viewer-body .code-copy-btn:hover {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+        }
+        .viewer-body .code-copy-btn.copied {
+            background: var(--color-success);
+            color: #fff;
+        }
         @media (max-width: 640px) { .viewer-body { padding: 24px 16px 60px; } }
     </style>
 </head>
@@ -45,10 +73,14 @@
         var params = new URLSearchParams(window.location.search);
         var file = params.get('file');
         var rawText = '';
+        var isPromptFile = file && /prompt|roleplay/i.test(file.split('/').pop());
 
         if (file) {
-            document.getElementById('filename').textContent = file;
+            document.getElementById('filename').textContent = file.split('/').pop();
             document.title = file.split('/').pop() + ' — Demo Viewer';
+            if (isPromptFile) {
+                document.getElementById('copy-all').textContent = '📋 Copy toàn bộ';
+            }
 
             fetch(file)
                 .then(function(r) { return r.text(); })
@@ -58,18 +90,20 @@
                     document.getElementById('content').innerHTML = marked.parse(text);
 
                     // Add copy buttons to code blocks
+                    var blockCount = 0;
                     document.querySelectorAll('pre code').forEach(function(codeEl) {
+                        blockCount++;
                         var pre = codeEl.parentElement;
                         pre.style.position = 'relative';
                         var btn = document.createElement('button');
                         btn.className = 'code-copy-btn';
-                        btn.style.opacity = '1';
-                        btn.textContent = 'Copy';
+                        btn.textContent = isPromptFile ? '📋 Copy Prompt' : '📋 Copy';
+                        var originalLabel = btn.textContent;
                         btn.addEventListener('click', function() {
-                            navigator.clipboard.writeText(codeEl.textContent).then(function() {
-                                btn.textContent = 'Copied!';
+                            navigator.clipboard.writeText(codeEl.textContent.trimEnd()).then(function() {
+                                btn.textContent = '✅ Copied!';
                                 btn.classList.add('copied');
-                                setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+                                setTimeout(function() { btn.textContent = originalLabel; btn.classList.remove('copied'); }, 1800);
                             });
                         });
                         pre.appendChild(btn);
@@ -81,10 +115,11 @@
         }
         document.getElementById('copy-all').addEventListener('click', function() {
             var btn = this;
+            var originalLabel = btn.textContent;
             navigator.clipboard.writeText(rawText).then(function() {
                 btn.textContent = '✅ Copied!';
                 btn.classList.add('copied');
-                setTimeout(function() { btn.textContent = '📋 Copy nội dung'; btn.classList.remove('copied'); }, 1500);
+                setTimeout(function() { btn.textContent = originalLabel; btn.classList.remove('copied'); }, 1500);
             });
         });
 

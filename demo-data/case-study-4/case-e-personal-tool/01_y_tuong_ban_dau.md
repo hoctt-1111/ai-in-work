@@ -1,5 +1,3 @@
-# Case E — Ý tưởng ban đầu (Input thô)
-
 ## Bối cảnh
 Công việc hàng ngày cần tính toán nhanh — estimate man-day, convert currency, tính % allocation... Dùng máy tính điện thoại thì thiếu tính năng, Google Calculator thì không lưu lịch sử.
 

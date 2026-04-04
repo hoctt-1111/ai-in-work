@@ -1,5 +1,3 @@
-# Case B — Glossary mẫu (Output kỳ vọng từ NotebookLM)
-
 ## 農業用語 (Thuật ngữ nông nghiệp)
 
 | 日本語 | Tiếng Việt | English | Giải thích |

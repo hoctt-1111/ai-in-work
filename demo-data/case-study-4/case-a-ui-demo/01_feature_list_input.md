@@ -1,5 +1,3 @@
-# Case A — Feature List Input (Đầu vào cho AI)
-
 ## Tình huống
 - **Dự án:** Hệ thống quản lý nông nghiệp (anonymize: "MARIC+ System")
 - **Giai đoạn:** Proposal — khách muốn thấy hình dung sản phẩm
