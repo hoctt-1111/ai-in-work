@@ -36,6 +36,7 @@
         <a href="javascript:history.back()">← Quay lại</a>
         <span class="viewer-filename" id="filename"></span>
         <button class="viewer-copy-btn" id="copy-all">📋 Copy nội dung</button>
+        <button class="viewer-copy-btn" id="download-all">⬇️ Download</button>
     </div>
     <div class="viewer-body section-content" id="content">Loading...</div>
 
@@ -86,6 +87,23 @@
                 btn.classList.add('copied');
                 setTimeout(function() { btn.textContent = '📋 Copy nội dung'; btn.classList.remove('copied'); }, 1500);
             });
+        });
+
+        document.getElementById('download-all').addEventListener('click', function() {
+            var filename = params.get('file') ? params.get('file').split('/').pop() : 'demo-file.txt';
+            var blob = new Blob([rawText], { type: 'text/plain;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            var btn = this;
+            btn.textContent = '✅ Downloaded!';
+            btn.classList.add('copied');
+            setTimeout(function() { btn.textContent = '⬇️ Download'; btn.classList.remove('copied'); }, 1500);
         });
 
         // Inherit theme
