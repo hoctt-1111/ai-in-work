@@ -1621,11 +1621,24 @@ Confirm spec bằng AI, risk analysis, spec comparison, workflow tự động.
   <p class="team-caption">🚀 Cùng nhau level up — AI là công cụ, con người là giá trị!</p>
 </div>
 
-## Call-to-action
+## 🎯 Call-to-action — Hãy hành động ngay!
 
-> *"Chọn **1 trong 7 khó khăn** hôm nay → áp dụng giải pháp **NGAY TRONG TUẦN** này → chia sẻ kết quả ở nhóm chat."*
->
-> *"Bắt đầu từ cái nhỏ nhất mà bạn gặp HÀNG NGÀY."*
+> 💬 *Đừng để "sẽ dùng AI sau khi học xong" trở thành "sẽ dùng AI... mãi mãi sau".*
+
+---
+
+### Bước 1: Nhìn lại công việc của bạn
+
+Hãy tự hỏi:
+
+- 🔴 **3 đầu việc bạn đang cảm thấy KHÓ KHĂN nhất** hiện tại là gì?
+- ⏱️ **3 đầu việc bạn đang cảm thấy TỐN THỜI GIAN nhất** là gì?
+
+### Bước 2: Chọn 1 — áp dụng ngay trong tuần này
+
+Đừng chờ "đầu việc lớn" hay "dự án quan trọng".
+
+**Bắt đầu từ cái nhỏ nhất bạn gặp hàng ngày** → áp dụng AI → chia sẻ kết quả với team! 🚀
 `
 }
 ];
