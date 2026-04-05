@@ -13,13 +13,13 @@ Context:
 - Deadline: 1 tháng
 
 Format bảng — mỗi task ghi effort trung bình (人日) theo từng domain:
-| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 |
+| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 | 備考 |
 
 Quy tắc:
 - Task không cần domain nào → ghi 0
 - Tách rõ: DB設計, API実装, 画面実装, テスト, レビュー, Migration
 - 合計 = tổng effort tất cả domain của task đó
-- Ghi chú task phức tạp vào cột 依存
+- Cột 備考: ghi điểm cần chú ý kỹ thuật hoặc điểm cần confirm với KH (prefix ⚠️). Nếu không có thì ghi —
 ```
 
 ## Bước 1 — Task breakdown (GitHub Copilot)
@@ -30,9 +30,10 @@ Phân tách spec 棚卸機能 này thành task list để estimate.
 Team: BE × 2, FE × 1, QA × 1. Stack: React + Spring Boot + PostgreSQL.
 
 Format bảng:
-| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 |
+| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 | 備考 |
 
 Quy tắc: task không cần domain nào → ghi 0. Tách rõ DB設計, API, 画面, テスト, レビュー, Migration.
+Cột 備考: điểm cần chú ý kỹ thuật hoặc cần confirm với KH (prefix ⚠️). Không có thì ghi —.
 ```
 
 ## Bước 2 — Summary + Buffer
