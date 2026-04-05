@@ -8,9 +8,8 @@ Từ spec chức năng 棚卸 trong sources, phân tách thành task list để 
 
 Context:
 - Dự án: 農産物在庫管理システム
-- Team: BE × 2, FE × 1, QA × 1
 - Tech: React + Spring Boot + PostgreSQL
-- Deadline: 1 tháng
+- Mục tiêu: xác định effort cần thiết cho từng task (không phụ thuộc vào số lượng member)
 
 Format bảng — mỗi task ghi effort trung bình (人日) theo từng domain:
 | No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 | 備考 |
@@ -27,7 +26,7 @@ Quy tắc:
 #file:demo-data/case-study-2/case-e-estimation/01_stocktaking_spec.md
 
 Phân tách spec 棚卸機能 này thành task list để estimate.
-Team: BE × 2, FE × 1, QA × 1. Stack: React + Spring Boot + PostgreSQL.
+Stack: React + Spring Boot + PostgreSQL. Mục tiêu: xác định effort cần thiết cho từng task (không phụ thuộc số lượng member).
 
 Format bảng:
 | No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 | 備考 |
