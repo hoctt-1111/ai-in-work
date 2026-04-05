@@ -1,32 +1,51 @@
 # Prompt — Tạo estimation breakdown từ spec
 
-## NotebookLM
+## Bước 1 — Task breakdown (NotebookLM)
 **Sources đã upload:** `01_stocktaking_spec.md` (棚卸機能 詳細設計書)
 
 ```
-Từ spec chức năng 棚卸 (Stocktaking) trong sources, phân tách thành danh sách task để estimate.
+Từ spec chức năng 棚卸 trong sources, phân tách thành task list để estimate.
 
 Context:
 - Dự án: 農産物在庫管理システム
-- Team: 4 developers (2 senior, 2 junior)
-- Tech stack: React + Spring Boot + PostgreSQL
-- Deadline khách muốn: 1 tháng
+- Team: BE × 2, FE × 1, QA × 1
+- Tech: React + Spring Boot + PostgreSQL
+- Deadline: 1 tháng
 
-Mỗi task gồm: タスク名 / 工程(設計/実装/テスト/レビュー) / 複雑度(H/M/L) / 工数(人日 min-max) / 依存 / 備考
-Format: bảng tiếng Nhật, paste được vào Excel.
+Format bảng — mỗi task ghi effort trung bình (人日) theo từng domain:
+| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 |
 
-Lưu ý:
-- Tách rõ Frontend / Backend / DB
-- Đừng quên các task: API設計, DB設計, 単体テスト, 結合テスト, コードレビュー
-- Ghi chú risk nếu có
+Quy tắc:
+- Task không cần domain nào → ghi 0
+- Tách rõ: DB設計, API実装, 画面実装, テスト, レビュー, Migration
+- 合計 = tổng effort tất cả domain của task đó
+- Ghi chú task phức tạp vào cột 依存
 ```
 
-## GitHub Copilot
+## Bước 1 — Task breakdown (GitHub Copilot)
 ```
-#file:demo-data/case-spec/case-e-estimation/01_stocktaking_spec.md
+#file:demo-data/case-study-2/case-e-estimation/01_stocktaking_spec.md
 
 Phân tách spec 棚卸機能 này thành task list để estimate.
-Team: 4 devs (2 senior, 2 junior). Stack: React + Spring Boot + PostgreSQL.
-Format bảng: タスク名 / 工程 / 複雑度 / 工数(人日) / 依存 / 備考
-Tách rõ Frontend / Backend / DB. Đừng quên テスト và レビュー.
+Team: BE × 2, FE × 1, QA × 1. Stack: React + Spring Boot + PostgreSQL.
+
+Format bảng:
+| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 |
+
+Quy tắc: task không cần domain nào → ghi 0. Tách rõ DB設計, API, 画面, テスト, レビュー, Migration.
+```
+
+## Bước 2 — Summary + Buffer
+```
+Dựa trên task list trên:
+1. Tổng hợp subtotal effort (人日) theo từng domain: BE / FE / QA / Infra
+2. Subtotal tổng
+3. Chọn risk level và áp dụng buffer:
+   - Low risk (spec rõ, team quen công nghệ): 10–15%
+   - Medium risk (1–2 điểm spec chưa rõ, tech stack quen): 20–25%
+   - High risk (spec mơ hồ nhiều, công nghệ mới): 30–40%
+4. Grand Total sau buffer
+5. Một dòng kết luận: "→ Submit cho KH: X 人日"
+
+Format: bảng, ghi rõ risk level được chọn và lý do ngắn.
 ```

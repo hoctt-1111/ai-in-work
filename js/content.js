@@ -1027,40 +1027,40 @@ Tuân theo format mẫu (file 2). Dùng thuật ngữ từ glossary (file 3).
 > 📂 **Demo files:** [Spec 棚卸機能](demo-data/case-study-2/case-e-estimation/01_stocktaking_spec.md) · [Prompt mẫu](demo-data/case-study-2/case-e-estimation/02_prompt.md)
 
 ### Tình huống
-PM khách hỏi: "見積もりをお願いします" (Xin estimation). BrSE cần phân tách spec thành task list + estimate man-day — thường tốn nửa ngày.
+PM khách hỏi: "見積もりをお願いします" (Xin estimation). BrSE cần phân tách spec thành task list + estimate man-day theo từng domain — thường tốn nửa ngày.
 
-### ✅ NotebookLM
+### ✅ Bước 1 — Task breakdown (NotebookLM / Copilot)
 
-**Sources:** Spec chức năng cần estimate
+**Output mẫu — Bảng task breakdown theo domain:**
 
-\`\`\`
-Từ spec chức năng trong sources, phân tách thành danh sách task.
-Context: Team 4 developers (2 senior, 2 junior).
-Mỗi task gồm: タスク名 / 工程(設計/実装/テスト/レビュー) / 複雑度(H/M/L) / 工数(人日 min-max) / 依存 / 備考
-Format: bảng tiếng Nhật, paste được vào Excel.
-\`\`\`
+| No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | DBテーブル設計 | 設計 | 0.75 | 0 | 0 | 0 | 0.75 | — |
+| 2 | 棚卸開始API（在庫凍結） | 実装 | 1.5 | 0 | 0 | 0 | 1.5 | #1 |
+| 3 | 実棚入力API | 実装 | 1.25 | 0 | 0 | 0 | 1.25 | #1 |
+| 4 | 差異計算・承認API | 実装 | 1.75 | 0 | 0 | 0 | 1.75 | #3 |
+| 5 | 棚卸開始画面（SCR-STK-001） | 実装 | 0 | 0.75 | 0 | 0 | 0.75 | #2 |
+| 6 | 実棚入力画面（SCR-STK-002） | 実装 | 0 | 1.25 | 0 | 0 | 1.25 | #3 |
+| 7 | 差異確認画面（SCR-STK-003） | 実装 | 0 | 1.25 | 0 | 0 | 1.25 | #4 |
+| 8 | コードレビュー（BE + FE） | レビュー | 0.75 | 0.75 | 0 | 0 | 1.5 | #7 |
+| 9 | テスト計画・ケース作成 | テスト | 0 | 0 | 1.25 | 0 | 1.25 | #7 |
+| 10 | 結合テスト実施 | テスト | 0 | 0 | 1.5 | 0 | 1.5 | #9 |
+| 11 | DBマイグレーション・環境設定 | 構築 | 0 | 0 | 0 | 0.75 | 0.75 | #1 |
 
-### ✅ GitHub Copilot — Attach file spec
+### ✅ Bước 2 — Summary + Buffer
 
-\`\`\`
-#file:specs/search_feature_spec.md
+| Domain | Subtotal (人日) |
+| --- | --- |
+| BE | 6.0 |
+| FE | 4.0 |
+| QA | 2.75 |
+| Infra | 0.75 |
+| **Subtotal** | **13.5** |
+| Buffer 20% *(Medium risk — spec có 1–2 điểm chưa rõ)* | +2.7 |
+| **Grand Total** | **~16.2** |
+| **→ Submit cho KH: ~16 人日** | |
 
-Phân tách spec này thành task list để estimate.
-Team: 4 devs (2 senior, 2 junior).
-Format bảng: タスク名 / 工程 / 複雑度 / 工数(人日) / 依存 / 備考
-\`\`\`
-
-### Output mẫu
-
-| No. | タスク名 | 工程 | 複雑度 | 工数(人日) | 依存 | 備考 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | 検索画面 設計 | 設計 | M | 0.5 - 1.0 | — | UI仕様の確認必要 |
-| 2 | 検索API実装 | 実装 | H | 1.0 - 2.0 | #1 | パフォーマンス考慮 |
-| 3 | フロントエンド実装 | 実装 | M | 1.0 - 1.5 | #1 | レスポンシブ対応 |
-| 4 | 単体テスト | テスト | M | 0.5 - 1.0 | #2,#3 | 境界値テスト含む |
-| 5 | 結合テスト | テスト | M | 0.5 - 1.0 | #4 | — |
-
-> ⚠️ **Lưu ý:** AI estimate chỉ là **reference point**. BrSE cần adjust dựa trên kinh nghiệm team thực tế, skill level, và context dự án.
+> ⚠️ **Lưu ý:** AI estimate là **reference point** — BrSE adjust dựa trên skill level thực tế của team. Buffer thay đổi theo risk: 10–15% (Low) / 20–25% (Medium) / 30–40% (High).
 
 ---
 
@@ -1595,26 +1595,6 @@ Tôi cần 1 máy tính online hỗ trợ:
 
 ---
 
-## Lộ trình 3 giai đoạn
-
-### 🏃 Tuần 1-2: Quick Win
-Chọn 1 khó khăn gặp nhiều nhất → dùng prompt template tương ứng
-
-### 🔄 Tháng 1: Build Habit
-Áp dụng checklist bảo mật + hậu kiểm. Xây prompt library riêng cho dự án.
-
-### 🚀 Tháng 2-3: Level Up
-Confirm spec bằng AI, risk analysis, spec comparison, workflow tự động.
-
----
-
-## Tài nguyên phát sau buổi sharing
-1. **Prompt template library** — 5 template cho email, dịch, tóm tắt, confirm, report
-2. **Checklist bảo mật** — 4 bước trước khi paste vào AI
-3. **Checklist hậu kiểm** — theo từng loại output
-4. **Framework CRAFT reference card**
-
----
 
 <div class="team-photo">
   <img src="images/closing.png" alt="AI × BrSE/Comtor Closing">
