@@ -9,6 +9,9 @@ Từ spec chức năng 棚卸 trong sources, phân tách thành task list để 
 Context:
 - Dự án: 農産物在庫管理システム
 - Tech: React + Spring Boot + PostgreSQL
+- Tiền đề: hệ thống đã có sẵn, đây là phát triển thêm chức năng mới
+- Vai trò: bạn là senior engineer thực hiện break task và estimate
+- Người thực hiện các task: middle-level engineer
 - Mục tiêu: xác định effort cần thiết cho từng task (không phụ thuộc vào số lượng member)
 
 Format bảng — mỗi task ghi effort trung bình (人日) theo từng domain:
@@ -26,7 +29,10 @@ Quy tắc:
 #file:demo-data/case-study-2/case-e-estimation/01_stocktaking_spec.md
 
 Phân tách spec 棚卸機能 này thành task list để estimate.
-Stack: React + Spring Boot + PostgreSQL. Mục tiêu: xác định effort cần thiết cho từng task (không phụ thuộc số lượng member).
+Stack: React + Spring Boot + PostgreSQL.
+Tiền đề: hệ thống đã có sẵn, đây là phát triển thêm chức năng mới.
+Vai trò: bạn là senior engineer thực hiện break task và estimate. Người thực hiện các task: middle-level engineer.
+Mục tiêu: xác định effort cần thiết cho từng task (không phụ thuộc số lượng member).
 
 Format bảng:
 | No. | タスク名 | 工程 | BE (人日) | FE (人日) | QA (人日) | Infra (人日) | 合計 (人日) | 依存 | 備考 |
