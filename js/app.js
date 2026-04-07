@@ -72,8 +72,9 @@
       sectionContent.innerHTML = headerHTML + '<div class="rendered-md">' + bodyHTML + '</div>';
       postProcess();
       sectionContent.classList.remove('fade-out');
-      sectionContent.scrollTop = 0;
-      document.querySelector('.main-content').scrollTop = 0;
+      requestAnimationFrame(function () {
+        scrollToTop();
+      });
     }, 150);
   }
 
@@ -173,9 +174,18 @@
   }
 
   // --- Navigation ---
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    sectionContent.scrollTop = 0;
+    document.querySelector('.main-content').scrollTop = 0;
+  }
+
   function goTo(sectionId) {
     if (sectionId < 0 || sectionId >= totalSections) return;
     currentSection = sectionId;
+    scrollToTop();
     renderSection(currentSection);
     updateUI();
     saveState();
